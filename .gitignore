@@ -3,3 +3,4 @@ build
 *.run
 *.exe
 *.o
+.DS_Store
