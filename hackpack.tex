@@ -1,0 +1,44 @@
+\documentclass[letterpaper, 10pt]{report}
+\title{Clemson Cyber Defense Hack Pack}
+\author{Clemson ACM}
+\date{\today}
+
+\input{./formatting/style.tex}
+
+\begin{document}
+\maketitle
+
+\input{./LICENCES/licence.tex}
+
+\input{./general/tencommandments.tex}
+
+\tableofcontents
+
+\chapter{Essential Tools}
+
+\chapter{Patching and Package Management}
+
+\chapter{Users and Passwords}
+
+\chapter{Auditing and Logs}
+
+\chapter{Backups}
+
+\chapter{Firewalls}
+
+\chapter{Services}
+
+\chapter{Injects and Reports}
+
+\bibliographystyle{plain}
+\bibliography{hackpack}
+
+\printindex
+
+#ifdef hackpackpp
+\includepdf[pages={-}]{./LICENCES/fdl.pdf}
+\includepdf[pages={-}]{./LICENCES/gpl.pdf}
+#endif
+
+\end{document}
+
