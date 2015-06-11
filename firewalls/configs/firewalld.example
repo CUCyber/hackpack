@@ -15,11 +15,11 @@ firewall-cmd --zone=public --add-interface=$ext_if
 
 for addr in $broken; do
 	firewall-cmd --zone=public \
-		--add-rich-rule='rule family="ipv4" service=ssh source=$addr log limit value="5/m"drop'
+		--add-rich-rule="rule family='ipv4' service=ssh source address=\"$addr\" log limit value='5/m' drop"
 	firewall-cmd --zone=public \
-		--add-rich-rule='rule family="ipv4" service=http source=$addr log limit value="5/m"drop'
+		--add-rich-rule="rule family='ipv4' service=http source address=\"$addr\" log limit value='5/m' drop"
 	firewall-cmd --zone=public \
-		--add-rich-rule='rule family="ipv4" service=https source=$addr log limit value="5/m"drop'
+		--add-rich-rule="rule family='ipv4' service=https source address=\"$addr\" log limit value='5/m' drop"
 done
 
 firewall-cmd --zone=public --add-service=ssh
