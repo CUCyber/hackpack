@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+	<short>FOO</short>
+	<description>Foo is a program that allows bar</description>
+	<port protocol="tcp" port="21"/>
+	<module name="nf_conntrack_foo"/>
+</service>

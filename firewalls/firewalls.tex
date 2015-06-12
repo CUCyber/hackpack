@@ -51,13 +51,29 @@ firewalld references the following directories of files:
 	\item /etc/firewalld --- where user overrides rules reside.
 \end{itemize}
 
-firewalld uses only the firewall-cmd binary.
+firewalld uses only the firewall-cmd binary.\ 
 
 firewalld is the new Linux firewall.
 It provides a usability layer on top of iptables.
 It focuses on zones and services.
+
 Zones are affiliated with source address or interfaces.
-Services define the ports that will be used with an application
+The zone can be referenced by scripts via its short name
+There is also description of the zone.
+This zone is affects all incoming traffic with the enp0s3 interface.
+It allows https traffic defined in the /usr/lib/firewalld/services/https.xml or overwritten in /etc/firewalld/services/https.xml.
+It also block and drops traffic on the 10.0.0.0/8 subnet logging the dropped packets.
+\acmlisting[caption=firewalld Script, label=firewalld Script]{./firewalls/configs/zone-firewalld.example}
+
+
+Services define the ports that will be used with an application.
+The service can be referenced by scripts via its short name
+There is also description of the service.
+This service allows traffic on tcp port 21.
+It uses a kernel module to help the Linux netfilter kernel module track and filter the traffic.
+This is not required for all modules, but is used for some services such as ftp.
+\acmlisting[caption=firewalld Script, label=firewalld Script]{./firewalls/configs/service-firewalld.example}
+
 It can be configured via scripts:
 
 \acmlisting[caption=firewalld Script, label=firewalld Script]{./firewalls/configs/firewalld.example}

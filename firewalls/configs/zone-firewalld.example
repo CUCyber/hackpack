@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<zone>
+	<short>Public</public>
+	<description>This is our external interface</description>
+	<interface name="enp0s3"/>
+	<service name="https"/>
+	<rule family="ipv4">
+		<source address="10.0.0.0/8"/>
+		<log>
+			<limit address="5/m"/>
+		</log>
+		<drop/>
+	</rule>
+</zone>
+
