@@ -1,0 +1,43 @@
+---
+- host: webservers # run this on the webserver group
+  sudo: yes # escalate this play from remote user to super user
+
+  # varibles needed in the httpd.conf template
+  vars:
+    http_port: 80
+    max_clients: 200
+
+  # tasks that will be run run on the server
+  tasks:
+
+    # demonstrates iteration
+    - name: create admins
+      user: name={{item.name}} shell={{item.shell}} groups=wheel append=yes
+      with_items:
+          - { name: 'matthew', shell '/bin/bash'}
+          - { name: 'mark', shell '/bin/zsh'}
+          - { name: 'luke', shell '/bin/fish'}
+
+    # demonstrates conditionals
+    - name: install apache for CentOS
+      yum: name=httpd state=latest
+      when: ansible_distribution == 'CentOS'
+
+    - name: install apache for Debian
+      apt: name=httpd state=latest
+      when: ansible_os_family == 'Debian'
+
+    # demonstrates handlers and templates
+    - name: update the apache config file
+      template: src=httpd.j2 dest=/etc/httpd.conf
+      notify:
+        - restart apache
+
+    # demonstrates starting a service
+    - name: ensure apache is running
+      service: name=httpd state=started enabled=yes
+
+  # tasks that need to be run when other tasks are run
+  handlers:
+      - name: restart apache
+        service: name=httpd state=restarted

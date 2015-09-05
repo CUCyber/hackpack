@@ -1,0 +1,71 @@
+\subsection{Ansible}\index{provisioner!ansible}
+Ansible is a lightweight agent-less provisioner that uses Python 2.X and OpenSSH as a backend.
+It is configured using Playbooks which are files written in a dialect of YAML.
+
+\subsubsection{Setting it up}
+
+\paragraph{Managed Windows Machines}
+Ansible can also manage Windows machines running PowerShell 3.0 or later.
+For windows machines, you will also need to create an encrypted host\_vars or group\_vars file on the control machine that contains the following information:
+
+\acmlisting[caption=Ansible Windows, label=Ansible Windows]{./tools/provisioners/ansible/scripts/ansible-vault.sh}
+
+It is also required to run the ConfigureRemotingForAnsible.ps1 from the Ansible source code script on the Windows machines that will be managed.
+\paragraph{Managed Linux Machines}
+Ansible is agent less, this means that only one machine must have Ansible installed on it.
+For Linux or BSD managed machines, all you have to have is OpenSSH and Python 2.X.
+For some Linux distributions where Python 3.X is the default, you may need to set ansible\_python\_interpetor $=$ /usr/bin/python2.
+
+\paragraph{Control Machine}
+The control machine must have a few more pieces of software.
+On most distributions, it can be installed from package repositories.
+It can also be installed from source:
+
+\acmlisting[caption=Ansible Install, label=Ansible Install]{./tools/provisioners/ansible/scripts/ansible-install.sh}
+
+
+\subsubsection{Inventory Management}
+The collections of machines that are managed via Ansible are called the inventory.  Here is an example inventory file:
+
+\acmlisting[caption=Ansible Hosts, label=Ansible Hosts]{./tools/provisioners/ansible/scripts/ansible-hosts.example}
+
+
+In this example we demonstrate, 
+\begin{itemize}
+	\item A set of hosts specified by a range of ip addresses
+	\item A set of hosts specified by domain name
+	\item A host using a different user and default port.
+	\item Targeting the localhost
+	\item Four groups of hosts called web, webservers, databases, and local
+	\item A group of groups called web that contains all the hosts in webservers and databases.
+\end{itemize}
+NOTE, group variables and host variables can also be specified in the hosts file as shown with the ansible\_connection example, but this format is discouraged because it does not follow a separation of concerns.
+
+\subsubsection{Sample Playbooks}
+
+Repositories containing Ansible playbooks  are generally arranged out as follows:
+
+\begin{itemize}
+\item site.yml --- the primary playbook.
+\item hosts --- the primary host inventory.
+\item group\_vars/ --- directory containing encrypted group variables.
+\item host\_vars/ --- directory containing encrypted host variables.
+\item roles/ --- directory containing roles that will be applied.
+\end{itemize}
+
+Here is an example playbook:
+\acmlisting[caption=Ansible Playbook, label=Ansible Playbook, ]{tools/provisioners/ansible/scripts/ansible-playbook.yml}
+
+These playbooks can also be split into separate sections in what are called roles.
+Here is how a sample role, in this case a webserver are stored:
+\begin{itemize}
+\item roles/webserver --- directory where the webserver role is stored.
+\item roles/webserver/files --- files that would be referenced via copy commands in the role.
+\item roles/webserver/tempates --- templates that would be referenced via template commands in the role.
+\item roles/webserver/tasks --- where tasks for the webserver role are stored.
+\item roles/webserver/handlers --- where handlers that kickoff post processing tasks for the webserver role are stored.
+\item roles/webserver/vars --- where role specific variables for the webserver role are stored.
+\item roles/webserver/defaults --- where role specific default values variables for the webserver role are stored.
+\item roles/webserver/meta --- where role specific meta data for the webserver role are stored such as dependencies could be listed.
+\end{itemize}
+
