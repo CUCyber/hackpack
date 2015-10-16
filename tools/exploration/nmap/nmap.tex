@@ -1,0 +1,57 @@
+\subsection{Nmap}\index{exploration!nmap}
+Nmap is a Network exploration tool and security and port scanner.
+It is useful for preforming host enumeration in IPv4 networks and auditing ports and services on specific hosts on IPv4 and IPv6 networks.
+
+\subsubsection{Common Options}
+
+\acmlisting[caption=nmap examples, label=nmap examples]{./tools/exploration/nmap/scripts/examples.sh}
+
+\paragraph{Host Discovery Options}
+For host discovery, the most important flag is -sn flag is very useful.
+It sends an ICMP ECHO to each target host.
+In IPv4 networks, this is a fast and easy way to enumerate hosts for a deeper scan.
+
+In IPv6 networks, the address space is probably too large to do this effectively.
+On solution in this case to examine the network switch MAC table or to use tcpdump or wireshark to sniff for packets.
+
+To conduct discovery using different types of packets use the -P\{n,S,A,U,Y\} options which use no pings, SYN, ACK, UDP, and SCTP packets respectively.
+
+\paragraph{Port Scanning Options}
+By default, nmap scans the 1000 most commonly used ports.
+To use nmap to scan for specific ports, use the -p flag to specify which ports to scan.
+It accepts hyphen separated ranges and comma separated lists.  
+To scan all ports, use the --allports long option.
+To use a different type of packets use the -s\{S,T,A,W,U,Y\} options which test with SYN, TCP connect, Ack, UDP, and SCTP INIT  packets respectively.
+
+\paragraph{Service Scanning Options}
+There are several commons flags to use here:
+\begin{itemize}
+	\item -O will run OS detection against the target.
+	\item -sV will run service version detection against the target.
+	\item -sC will run common default scripts against the target to detect various things.
+	\item --script="<script\_name>" long option a specified script or group of scripts against the targets.
+	\item -A will run Enable OS detection, version detection, script scanning, and traceroute.
+\end{itemize}
+
+Scripts that are available can often be found the /usr/share/nmap directory.  Refer to these for examples on how to write scripts.
+
+\paragraph{Timing and Optimization}
+Nmap has a series of timing and optimizations that can be run.
+The most useful is -T[1-5] which specifies how quickly packets are to be sent.
+1 is the slowest, 5 is the fastest.
+You can also specify max retries via the --max-retries long option.
+You can also specify max timeout via the --host-timeout long option.
+
+\paragraph{Evasive Options}
+If you are running nmap offensively, there are several flags that control how evasive nmap behaves.
+These allow for spoofing of IP address(-S) and mac address (--spoof-mac).
+And setting various options for sending custom packets.
+
+\paragraph{Output Options}
+There are various output options the most important are:
+\begin{itemize}
+	\item -oN <file\_name> output normal output to a file
+	\item -oG <file\_name> output grep able output to a file
+	\item -oX <file\_name> output XML output to a file
+\end{itemize}
+
