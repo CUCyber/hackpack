@@ -11,6 +11,8 @@ configure_sshd() {
 	UsePAM yes
 	UsePrivilegeSeparation sandbox
 	AcceptEnv LANG LC_*
+	ClientAliveInterval 300
+	ClientAliveCountMax 0
 	EOF
 
 	#After the config file is modified restart the service
