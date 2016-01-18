@@ -1,0 +1,28 @@
+\section{logindefs}\index{logindefs}\index{linux}
+
+Login.defs is a configuration file that controls login functionality on GNU/Linux machines using encrypted password files.
+It is one of 3 tools that can control this process (login.defs, pam, logind)
+
+In general, there are a few best practices for using login.defs:
+
+The following settings should be configured in \lstinline|/etc/login.defs|:
+\begin{itemize}
+	\item \lstinline|CONSOLE| should be set to \lstinline|/etc/securetty|
+	\item set \lstinline|PASS_MAX_DAYS| to 30
+	\item set \lstinline|PASS_MIN_DAYS| to 7
+	\item set \lstinline|PASS_WARN_DAYS| to 8
+	\item set \lstinline|PASS_MIN_LEN| to 8
+	\item set \lstinline|MAIL_DIR| to \lstinline|/var/spool/mail|
+	\item set \lstinline|UMASK| to 077
+\end{itemize}
+
+If you set CONSOLE to, you should also ensure the following is in \lstinline|/etc/securetty|:
+\begin{itemize}
+	\item console
+	\item tty1
+	\item tty2
+	\item tty3
+	\item tty4
+	\item tty5
+	\item tty6
+\end{itemize}
