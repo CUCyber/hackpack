@@ -1,0 +1,19 @@
+\section{sudo}\index{sudo}\index{linux}
+
+Sudo is short for Super User DO.
+It allows for non-root users to request elevated privileges on linux systems.
+Sudo has a variety of options that can be configured.
+Here are some basic suggestions for managing systems that use sudo
+
+\begin{itemize}
+	\item Limit users permissions where possible, users should not have \lstinline|ALL = (ALL) ALL|
+	\item Avoid using groups with root permissions
+\end{itemize}
+
+The sudoers (config file for sudo) file should be edited as root using the visudo command which verifies the syntax before making changes.
+There are also other configuration files that can be found in \lstinline|/etc/sudoers.d|
+These can be edited using \lstinline|visudo -f <filename>|
+
+The following script configures sudoers with an appropriate:
+
+\lstinputlisting{users/scripts/sudoers.sh}
