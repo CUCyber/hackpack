@@ -14,7 +14,8 @@ It is also required to run the ConfigureRemotingForAnsible.ps1 from the Ansible 
 \paragraph{Managed Linux Machines}
 Ansible is agent less, this means that only one machine must have Ansible installed on it.
 For Linux or BSD managed machines, all you have to have is OpenSSH and Python 2.X.
-For some Linux distributions where Python 3.X is the default, you may need to set ansible\_python\_interpetor $=$ /usr/bin/python2.
+For some Linux distributions where Python 3.X is the default or python is installed in an non-standard location, you may need to set ansible\_python\_interpetor $=$ /usr/bin/python2.
+For best performance, sftp must be enabled in /etc/ssh/sshd\_config as a subsystem with the path to the sftp-server binary
 
 \paragraph{Control Machine}
 The control machine must have a few more pieces of software.
@@ -22,7 +23,6 @@ On most distributions, it can be installed from package repositories.
 It can also be installed from source:
 
 \acmlisting[caption=Ansible Install, label=Ansible Install]{./tools/provisioners/ansible/scripts/ansible-install.sh}
-
 
 \subsubsection{Inventory Management}
 The collections of machines that are managed via Ansible are called the inventory.  Here is an example inventory file:
@@ -69,3 +69,24 @@ Here is how a sample role, in this case a webserver are stored:
 \item roles/webserver/meta --- where role specific meta data for the webserver role are stored such as dependencies could be listed.
 \end{itemize}
 
+\paragraph{Ansible Vault}
+Ansible has a means of creating AES encrypted files for use of storing configuration.
+To create a file use \lstinline|ansible-vault create <filename>|
+To edit a file use \lstinline|ansible-vault edit <filename>| which will open the file un-encrypted in the user's EDITOR and re-encrypt it after editing.
+It can be used for file containing variables and files that are part of roles.
+
+\paragraph{Extending Ansible}
+Somethings Ansible is just not good at, string parsing for instance.
+You can write modules in Python that do this heavy lifting.
+Here is a sample module that checks for the sshd version, and sets a variable with the output
+
+\acmlisting{./tools/provisioners/ansible/scripts/ansible-facts-module.py}
+
+\paragraph{Documentation}
+For each of the ansible modules, there is documentation that is installed.
+It can be viewed using the \lstinline|ansible-doc| command.
+Use \lstinline|ansible-doc -l| to get a list of all the available modules and a short description
+
+Ansible uses Jinja2 for Templates.
+To access the list of filters as well as extensive examples, run \lstinline|pydoc jinja2.filters|.
+These templates can also be used for variables, see \lstinline|ansible all -m setup| for a list of available facts.
