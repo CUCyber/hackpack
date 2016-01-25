@@ -1,6 +1,7 @@
 ---
 - host: webservers # run this on the webserver group
-  sudo: yes # escalate this play from remote user to super user
+  become: yes # escalate this play from remote user to super user
+              # A user can also be specified via "become_user:"
 
   # varibles needed in the httpd.conf template
   vars:
@@ -14,9 +15,9 @@
     - name: create admins
       user: name={{item.name}} shell={{item.shell}} groups=wheel append=yes
       with_items:
-          - { name: 'matthew', shell '/bin/bash'}
-          - { name: 'mark', shell '/bin/zsh'}
-          - { name: 'luke', shell '/bin/fish'}
+          - { name: 'matthew', shell: '/bin/bash'}
+          - { name: 'mark', shell: '/bin/zsh'}
+          - { name: 'luke', shell:'/bin/fish'}
 
     # demonstrates conditionals
     - name: install apache for CentOS
@@ -24,7 +25,7 @@
       when: ansible_distribution == 'CentOS'
 
     - name: install apache for Debian
-      apt: name=httpd state=latest
+      apt: name=lighttpd state=latest
       when: ansible_os_family == 'Debian'
 
     # demonstrates handlers and templates
