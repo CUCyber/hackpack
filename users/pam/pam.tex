@@ -1,7 +1,9 @@
 \section{pam}\index{pam}\index{linux}
 
 PAM is short for Pluggable Authentication Module.
-It controls the logins that read the \lstinline|/etc/shadow| file.
+It controls the logins on Linux machines.
+By default, it reads the \lstinline|/etc/shadow| file.
+It can also be configured to use LDAP or Kerberos for remote authentication.
 In general the following should be configured:
 
 \begin{itemize}
@@ -9,5 +11,5 @@ In general the following should be configured:
 	\item use \lstinline|pam_unix obscure sha512 remember=5|
 \end{itemize}
 
-Here is a basic configuration for PAM and login.defs:
+Here is a script that deploys a basic configuration for PAM and login.defs:
 \lstinputlisting{users/scripts/passwords.sh}
