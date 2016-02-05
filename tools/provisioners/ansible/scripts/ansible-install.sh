@@ -11,6 +11,10 @@ tar -xzvf ./Python-2.7.tgz
 cd ./Python-2.7
 ./configure && make && make install
 
+#For CentOS
+sudo yum install epel-release
+sudo yum install autoconf gcc python-devel
+
 # or install from pip
 sudo pip install ansible
 
