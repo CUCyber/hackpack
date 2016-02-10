@@ -1,0 +1,20 @@
+; put address octets backwards
+$ORIGIN 0.0.10.in-addr.arpa.
+
+; TTL of 10 minutes for quick change during competitions
+$TTL    600
+
+; hostmaster.example.com. is the email hostmaster@example.com
+@       IN      SOA     ns1.example.com. hostmaster.example.com. (
+							1       ; Serial
+							600     ; Refresh
+							600     ; Retry
+							2419200 ; Expire
+							600     ; Negative Cache TTL (how long to cache negative (e.g. NXDOMAIN) responses)
+						)
+		IN      NS      ns1         ; this box
+
+; if on a bigger subnet, put octets backwards (i.e. 101.0.0)
+101     IN      PTR     ns1         ; 10.0.0.101
+102     IN      PTR     mail        ; 10.0.0.102
+103     IN      PTR     www         ; 10.0.0.103

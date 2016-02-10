@@ -1,0 +1,11 @@
+\section{BIND}\index{bind}
+
+BIND is a common, featured DNS server. To make it more secure and less vulnerable to attacks, it is recommended to only run BIND as an authoritative nameserver and not a recursive nameserver. Below is a set of example configuration files for securely configuring BIND as an authoritative nameserver with forward and reverse records.
+
+\acmlisting[caption=named.conf, label=BIND Configuration]{./services/bind/conf/named.conf}
+
+\acmlisting[caption=example.com.conf, label=example.com Configuration]{./services/bind/conf/example.com.conf}
+
+\acmlisting[caption=db.example.com, label=example.com Zone]{./services/bind/conf/db.example.com}
+
+\acmlisting[caption=db.10.0.0, label=example.com Reverse Zone]{./services/bind/conf/db.10.0.0}
