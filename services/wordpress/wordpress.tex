@@ -1,18 +1,29 @@
 \section{Wordpress}\index{wordpress}
 
-Wordpress is a PHP content management system. It has reasonable security in a new default install, but has a poor track record for remote execution exploits. The best way to secure Wordpress is to update it if possible and remove all unnecessary or old plugins. The following will help limit damage from possible remaining exploits:
+Wordpress is a PHP content management system. It has reasonable security in a new default install, but has a poor track record for remote execution exploits. The best way to secure Wordpress is to update it if possible and remove all unnecessary or old plugins.
+
+\subsection{Setup}
+
+Download the latest tarball available at \lstinline|https://wordpress.org/latest.tar.gz| and untar it into the document root (i.e. /var/www). Create and configure the necessary using the following SQL commands.
+
+\acmlisting[caption=Wordpress SQL Setup, label=Wordpress SQL Setup]{./services/wordpress/sql/wordpress.sql}
+
+Navigate to the setup page at \lstinline|http://localhost/wordpress/| and follow the setup instructions. Proceed below with how to add a few extra layers of security to a Wordpress installation.
+
+\subsection{Security}
 
 \begin{itemize}
-	\item make sure file permissions are good
+	\item make sure file permissions are restrictive
 	\begin{itemize}
-		\item `/` needs to be writable only by user account
-		\item `/wp-content` needs to be writable by web server
-		\item `/wp-content/plugins` needs to be writable only by user account
+		\item `/` needs to be writable only by the owning user account (e.g. 'www')
+		\item `/wp-content` needs to be writable by web server (e.g. 'apache')
+		\item `/wp-content/plugins` needs to be writable only by the owning user account (e.g. 'www')
 	\end{itemize}
 
 	\item remove unnecessary database permissions
 	\begin{itemize}
-		\item only allow the SQL user to have \lstinline|SELECT,INSERT,UPDATE,DELETE|
+		\item reduce database permissions for the SQL user by running the following command, replacing \lstinline|wordpress.*| with the Wordpress tables and \lstinline|wordpress@localhost| with the Wordpress user if necessary.
+		\item \lstinline|REVOKE ALL PRIVILEGES ON wordpress.* from wordpress@localhost; GRANT SELECT,INSERT,UPDATE,DELETE ON wordpress.* TO wordpress@localhost; FLUSH PRIVILEGES;|
 	\end{itemize}
 
 	\item disable file editing from wp-admin
@@ -20,7 +31,7 @@ Wordpress is a PHP content management system. It has reasonable security in a ne
 		\item add \lstinline|define('DISALLOW_FILE_EDIT', true);| to \lstinline|wp-config.php|
 	\end{itemize}
 
-	\item move \lstinline|wp-config.php| to the directory above the wordpress root
+	\item move \lstinline|wp-config.php| to the directory above the Wordpress root
 
-	\item add 'AskApache Password Protect'
+	\item add 'AskApache Password Protect' which enables HTTP authentication preventing wp-admin from being exploited
 \end{itemize}
