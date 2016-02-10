@@ -1,6 +1,6 @@
 \section{BIND}\index{bind}
 
-BIND is a common, featured DNS server. To make it more secure and less vulnerable to attacks, it is recommended to only run BIND as an authoritative nameserver and not a recursive nameserver. Below is a set of example configuration files for securely configuring BIND as an authoritative nameserver with forward and reverse records.
+BIND is a common, featured DNS server. To make it more secure and less vulnerable to attacks, it is recommended to only run BIND as an authoritative nameserver and not a recursive nameserver. The configuration for BIND is usually stored in either \lstinline|/etc/bind/|, \lstinline|/etc/named/|, or split between \lstinline|/etc/named.conf| and \lstinline|/var/named/|. Utilize the \lstinline|named-checkconf| utility to check configuration before applying it. Below is a set of example configuration files for securely configuring BIND as an authoritative nameserver with forward and reverse records.
 
 \acmlisting[caption=named.conf, label=BIND Configuration]{./services/bind/conf/named.conf}
 
