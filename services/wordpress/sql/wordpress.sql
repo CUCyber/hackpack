@@ -1,4 +1,4 @@
 CREATE USER wordpress@localhost IDENTIFIED BY 'password';
 CREATE DATABASE wordpress;
-GRANT GRANT SELECT,INSERT,UPDATE,DELETE ON wordpress.* TO wordpress@localhost;
+GRANT SELECT,INSERT,UPDATE,DELETE ON wordpress.* TO wordpress@localhost;
 FLUSH PRIVILEGES;
