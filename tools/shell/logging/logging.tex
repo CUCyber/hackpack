@@ -1,0 +1,12 @@
+\subsection{Logging}
+
+There are a few commands that can be used to log terminal output that can be useful for generating logs and audit reports.
+All three of these commands log all text entered into the terminal including ascii escape sequences so some clean up maybe necessary for readability.
+\mbox{\lstinline|sed -r "s,\x1B\[[0-9;]*[a-zA-Z],,g"|} is a good start.
+
+
+\begin{itemize}
+\item \lstinline|script [filename]| --- logs all commands to a file until ctrl-d is pressed
+\item \lstinline|screen| --- use ctrl-a H to start and stop logging
+\item \lstinline|tmux pipepane -o 'cat >>~/logfile.txt'| --- run this again to stop
+\end{itemize}
