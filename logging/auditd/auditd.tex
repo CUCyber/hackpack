@@ -1,0 +1,21 @@
+\section{Auditd}
+
+Linux has a built in auditing framework that acts in kernel space.
+This portion of the kernel, communicates with the userspace auditd server.
+It can be configured to monitor files and syscalls.
+
+\acmlisting[label=auditd install,caption=auditd install]{./logging/auditd/scripts/audit_install.sh}
+
+The user space auditing commands, can be used to configure logs.
+Audit can stores its rules in /etc/audit/audit.rules or in files inside /etc/audit/audit.d/
+The syntax for these files is the same as the user space commands
+
+\acmlisting[label=auditd install,caption=auditd install]{./logging/auditd/scripts/audit_rules.sh}
+
+Viewing the auditlog can be done in a few ways:
+
+\begin{enumerate}
+	\item aureport --- query logs for a specific event
+	\item ausearch --- view a summary of recent events
+	\item syslog --- view logs typically stored in /var/log/audit/audit.log
+\end{enumerate}
