@@ -1,0 +1,84 @@
+\section{Apache Tomcat}\index{web server!tomcat}\index{java}
+
+Apache Tomcat is a web server designed to serve Java Server Page (JSP) web applications.
+
+\subsection{installation}
+
+\begin{itemize}
+	\item Avoid running tomcat with other services
+	\item Remove the sample server files
+	\item Do not reveal excess information
+		\begin{itemize}
+		\item Do not advertise version information
+		\item Disable X-Powered-By HTTP header by setting \lstinline|xpoweredBy="false"| in the Connectors
+		\item Disable Allow Trace HTTP header by setting \lstinline|allowTrace="false"| in the Connectors
+		\item Disable Client facing Stack Traces
+		\end{itemize}
+	\item Protect shutdown port by either disable by setting port to -1 or setting shutdown value to a random value
+	\item Ensure that file permissions are correct
+		\begin{itemize}
+		\item Make \lstinline|$CATALINA_HOME| owned by \lstinline|tomcat_admin:tomcat| with permissons 750
+		\item Make \lstinline|$CATALINA_BASE| owned by \lstinline|tomcat_admin:tomcat| with permissons 750
+		\item Make \lstinline|$CATALINA_HOME/conf| owned by \lstinline|tomcat_admin:tomcat| with permissons 770
+		\item Make \lstinline|$CATALINA_HOME/logs| owned by \lstinline|tomcat_admin:tomcat| with permissons 770
+		\item Make \lstinline|$CATALINA_HOME/temp| owned by \lstinline|tomcat_admin:tomcat| with permissons 770
+		\item Make \lstinline|$CATALINA_HOME/bin| owned by \lstinline|tomcat_admin:tomcat| with permissons 750
+		\item Make \lstinline|$CATALINA_HOME/webapps| owned by \lstinline|tomcat_admin:tomcat| with permissons 750
+		\item Make \lstinline|$CATALINA_HOME/conf/catalina.policy| owned by \lstinline|tomcat_admin:tomcat| with permissons 600
+		\item Make \lstinline|$CATALINA_HOME/conf/catalina.properties| owned by \lstinline|tomcat_admin:tomcat| with permissons 600
+		\item Make \lstinline|$CATALINA_HOME/conf/logging.properties| owned by \lstinline|tomcat_admin:tomcat| with permissons 600
+		\item Make \lstinline|$CATALINA_HOME/conf/server.xml| owned by \lstinline|tomcat_admin:tomcat| with permissons 600
+		\item Make \lstinline|$CATALINA_HOME/conf/tomcat-users.xml| owned by \lstinline|tomcat_admin:tomcat| with permissons 600
+		\item Make \lstinline|$CATALINA_HOME/conf/web.xml| owned by \lstinline|tomcat_admin:tomcat| with permissons 600
+		\end{itemize}
+	\item Use better authentication
+		\begin{itemize}
+		\item Configure Realms to not use MemoryRealm in server.xml
+		\item Configure Realms to use LockOutRealms
+		\item If possible use Client-Cert Authentication by setting \lstinline|clientAuth="True"| in server.xml
+		\end{itemize}
+	\item Use SSL where possible
+		\begin{itemize}
+		\item Ensure that SSLEnabled is set to True for Sensitive Connectors in server.xml
+		\item Set the scheme to "https" in connectors in server.xml
+		\item Ensure that secure is set to false on connectors that are not using SSL in sever.xml.
+		\item Ensure that the sslProtocol is "TLS" for all connectors using SSLEngine in server.xml.
+		\end{itemize}
+	\item Configure Logging
+		\begin{itemize}
+		\item Ensure the following lines are in logging.properties \lstinline|handlers=org.apache.juli.FileHandler, java.util.logging.ConsoleHandler|
+		\item Ensure the following lines are in logging.properties \lstinline|org.apache.juli.FileHandler.level=FINEST|
+		\item Ensure that className is set to org.apache.catalina.valves.FastCommonAccessLogValve in \lstinline|$CATALINA_BASE/<app name>/META-INF/context.xml|
+		\item Ensure that directory is set to \lstinline|$CATALINA_HOME/logs| |in \lstinline|$CATALINA_BASE/<app name>/META-INF/context.xml|
+		\item Ensure that pattern is set to \lstinline|"%t % U %a %A %m %p %q %s"| in \lstinline|$CATALINA_BASE/<app name>/META-INF/context.xml|
+		\end{itemize}
+	\item Prevent unexpected code execution
+		\begin{itemize}
+		\item Set package.access = \lstinline|sun.,org.apache.catalina.,org.apache.coyote.,org.apache.tomcat.,org.apache.jasper| in conf/catalina.properties
+		\item ensure that Tomcat is started with \lstinline|-security|
+		\item ensure that \lstinline|autoDeploy="false"| in server.xml
+		\item ensure that \lstinline|deployOnStartup="false"| in server.xml
+		\end{itemize}
+	\item protect the manager application
+		\begin{itemize}
+		\item Ensure that the valves with the class RemoteAddrValve is set to allow on \lstinline|127.0.0.1| only in server.xml
+		\item Ensure that the valves with the class RemoteAddrValve is set to allow on \lstinline|127.0.0.1| only in "webapps/host-manager/manager.xml" if it must be used.
+		\item Force SSL to access manager if it must be used.
+		\item Rename the manager application by renaming the xml file and moving the app to a new corresponding directory
+		\end{itemize}
+	\item disable insecure startup settings
+		\begin{itemize}
+		\item Ensure that \lstinline|-Dorg.apache.catalina.STRICT_SERVLET_COMPLIANCE=true| is set in startup script
+		\item Ensure that \lstinline|-Dorg.apache.catalina.connector.RECYCLE_FACADES=false| is set in startup script
+		\item Ensure that \lstinline|-Dorg.apache.catalina.connector.CoyoteAdapter.ALLOW_BACKSLASH=false| is set in startup script
+		\item Ensure that \lstinline|-Dorg.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH=false| is set in startup script
+		\item Ensure that \lstinline|-Dorg.apache.coyote.USE_CUSTOM_STATUS_MSG_IN_HEADER=false| is set in startup script
+		\end{itemize}
+	\item Do not allow symbolic linking in context.xml by setting \lstinline|allowLinking="false"|
+	\item Do not run applications as privileged in context.xml by setting \lstinline|privileged="false"|
+	\item Do not allow cross context requests in context.xml by setting \lstinline|crossContext="false"|
+	\item Do not allow resolving hosts on logging Valves by setting \lstinline|resolveHosts="false"|
+\end{itemize}
+
+
+\acmlisting[label=tomcat install, caption=Apache Tomcat Intall]{./services/tomcat/scripts/install.sh}
