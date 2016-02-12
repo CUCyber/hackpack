@@ -7,7 +7,7 @@ There is a large variety of steps that are important for securing Apache.
 \begin{itemize}
 	\item Install Mod Security either from repos or from www.modsecurity.org
 	\item Configure the Apache to use the Mod Security core rules from the repos or www.modsecurity.org
-	\item Remove unnecessary options and text from Apache's httpd.conf file
+	\item Remove unnecessary options and text from Apache's httpd.conf file and /etc/httpd/conf.d (sometimes located at /etc/apache2/conf/extra)
 	\item Remove all unnessisary modules entries from Apache's httpd.conf file
 	\item Create an Apache user and group without a shell
 	\item Configure Apache to run using this user and group
