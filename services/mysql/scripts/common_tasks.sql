@@ -10,9 +10,8 @@ SHOW TABLES; -- displays every table in the current database
 -----------------------------
 -- Verify all database users:
 -----------------------------
--- Log in with:
------------------------------
-# mysql -u root -p
+
+# mysql -u root -p -- Login with root
 -- Type in root password in prompt. If root doesn't have a password, you should set one now:
 UPDATE mysql.User SET Password=PASSWORD('new root password') WHERE User='root';
 -- Get list of all users:
