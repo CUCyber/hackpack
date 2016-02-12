@@ -17,8 +17,8 @@ UPDATE mysql.User SET Password=PASSWORD('new root password') WHERE User='root';
 -- Get list of all users:
 SELECT Host, User, Password from mysql.User;
 
---If there are users that shouldn't be there, delete 
---them (remember that % and _ are wildcards, % means 0 or more 
+--If there are users that shouldn't be there, delete
+--them (remember that % and _ are wildcards, % means 0 or more
 --characters and _ means exactly one character).
 
 --Delete all bad users. This should include all anonymous users, and any user
@@ -43,9 +43,9 @@ FLUSH PRIVILEGES;
 --isn't against Policy.
 
 
------------------------------ 
+-----------------------------
 -- Creating new users:
------------------------------ 
+-----------------------------
 --You should only create users with specific access
 --to a specific database (e.g. one user per application that uses a database).
 --Additionally, you should restrict the Host as much as possible. If your
@@ -54,30 +54,32 @@ FLUSH PRIVILEGES;
 --DATABASE ACCESS IS REQUIRED BY THE INJECT should you open up the host to
 --something outside of your team's network (e.g. '%')
 
-Create the database first
+--Create the database first
 CREATE DATABASE webapp_name;
 
 --Now add a user to it with a secure password:
 --With minimal write access (can add/delete records, but not add/drop tables or
 --table structures)
 
-GRANT INSERT, UPDATE, SELECT, DELETE ON webapp_name.* TO 
+GRANT INSERT, UPDATE, SELECT, DELETE ON webapp_name.* TO
 	'database_user'@'hostname per above' IDENTIFIED BY 'password goes here';
 --With full write access to the given database
-GRANT ALL PRIVILEGES ON webapp_name.* TO 
+GRANT ALL PRIVILEGES ON webapp_name.* TO
 	'database_user'@'hostname per above' IDENTIFIED BY 'password goes here';
 
 
 -----------------------------
 -- Get a user's Perms:
 -----------------------------
+SHOW GRANTS FOR 'user'@'host';
+
 SELECT * FROM mysql.User where User='user' and Host='host';
 --If you see a lot of Y's and the user ISN'T root@localhost, something is wrong.
 
 
 -----------------------------
 -- Backing up and restoring the database:
------------------------------ 
+-----------------------------
 --This should be in your list of things to do at
 --the beginning of competition, as well as semi-frequently throughout when you
 --do installations of new webapps, etc. Each command will prompt you to type
@@ -85,22 +87,22 @@ SELECT * FROM mysql.User where User='user' and Host='host';
 --password in the command line because it does not get saved in .bash_history
 --and possibly other places.
 
-# is beginning of shell (Linux):
-Backup:
-# mysqldump --all-databases -u root -p > backup.sql
-Restore:
-# mysql -u root -p < backup.sql
+-- # is beginning of shell (Linux):
+--Backup:
+-- # mysqldump --all-databases -u root -p > backup.sql
+--Restore:
+-- # mysql -u root -p < backup.sql
 
 
 -----------------------------
 -- Reset root password:
 -----------------------------
-#Stop MySQL
-#mysqld -u mysql --skip-grant-tables
-#mysql -u root --Connect as root
+--Stop MySQL
+-- # mysqld -u mysql --skip-grant-tables
+-- # mysql -u root --Connect as root
 
 UPDATE mysql.User SET Password=PASSWORD('new root password') WHERE User='root';
-FLUSH PRIVILEGES; 
+FLUSH PRIVILEGES;
 
 --to re-load the grant tables and make root and all other users
 --have passwords again
