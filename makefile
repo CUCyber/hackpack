@@ -18,7 +18,7 @@ clean:
 	rm -f $(OUTFILE)
 
 $(OUTFILE):
-	pandoc --template=$(TEMPLATE) --standalone --toc --output $(OUTFILE) $$($(FIND) -e 'LICENSE.md' -e 'README.md' .)
+	pandoc --template=$(TEMPLATE) --standalone --toc --output $(OUTFILE) $$($(FIND) -e 'LICENSE.md' -e 'README.md' -f general -l appendix -g index.md .)
 
 $(WEBSITE)/$(OUTFILE):
 	cp $(OUTFILE) $(WEBSITE)/
