@@ -9,7 +9,7 @@ WEBSITE='../website'
 all: $(OUTFILE)
 
 open: $(OUTFILE)
-	setsid xdg-open $(OUTFILE) &>/dev/null
+	xdg-open $(OUTFILE) &>/dev/null & disown
 
 update: $(WEBSITE)/$(OUTFILE)
 
