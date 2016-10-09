@@ -13,29 +13,33 @@ To create simple archive backups, use the tar command. These backups should be c
 
 ### Commands
 
+
+#### Backup
+
 ```sh
-#!/bin/bash
-#A script that backs up the system using tar
+#!/bin/sh
+useradd flynn
+mkdir -p /home/flynn/
+tar cjpf /home/flynn/kevin \
+	--exclude={/sys/*,/dev/*,/proc/*,/tmp/*,/run/*} \
+	--exclude=/home/flynn/* /
+chown flynn:flynn /home/flynn/kevin
+chmod 640 /home/flynn/kevin
+```
 
-backupsystem() {
-	useradd flynn
-	mkdir -p /home/flynn/
-	tar cjpf /home/flynn/kevin \
-		--exclude={/sys/*,/dev/*,/proc/*,/tmp/*,/run/*} \
-		--exclude=/home/flynn/* /
-	chown flynn:flynn /home/flynn/kevin
-	chmod 640 /home/flynn/kevin
-}
 
-extractfiles() {
-	tar xjpf /home/flynn/kevin --wildcards "$@"
-}
+#### Extract
 
-restoresystem() {
-	cd /
+```sh
+#!/bin/sh
+tar xjpf /home/flynn/kevin --wildcards "$@"
+```
 
-	tar xjpf /home/flynn/kevin
-}
 
-backupsystem
+#### Restore
+
+```sh
+#!/bin/sh
+cd /
+tar xjpf /home/flynn/kevin
 ```
