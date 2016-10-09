@@ -24,7 +24,7 @@ Navigate to the setup page at 'http://localhost/wordpress/' and follow the setup
 	- '/wp-content' needs to be writable by web server (e.g. 'apache')
 	- '/wp-content/plugins' needs to be writable only by the owning user account (e.g. 'www')
 * Remove unnecessary database permissions
-	- reduce database permissions for the SQL user by running the following command, replacing \lstinline|wordpress.*| with the Wordpress tables and \lstinline|wordpress@localhost| with the Wordpress user if necessary.
+	- reduce database permissions for the SQL user by running the following command, replacing `wordpress.*` with the Wordpress tables and `wordpress@localhost` with the Wordpress user if necessary.
 	- `REVOKE ALL PRIVILEGES ON wordpress.* from wordpress@localhost; GRANT SELECT,INSERT,UPDATE,DELETE ON wordpress.* TO wordpress@localhost; FLUSH PRIVILEGES;`
 * Disable file editing from wp-admin
 	- add `define('DISALLOW_FILE_EDIT', true);` to 'wp-config.php'
