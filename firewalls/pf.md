@@ -69,6 +69,6 @@ pass in on $ext_if proto tcp to any port ssh flags S/SA keep state \
 (max-src-conn 5, max-src-conn-rate 5/5, overload <childrens> flush)
 pass inet proto icmp icmp-type echoreq
 
-# adapted from the ["BSD firewalls: PF" by Jupiter Broadcasting](http://www.bsdnow.tv/tutorials/pf)
-# which is distrusted under [CC-BY-SA](http://creativecommons.org/licenses/by-sa/4.0/)
+# adapted from the http://www.bsdnow.tv/tutorials/pf
+# which is distrusted under CC-BY-SA
 ```

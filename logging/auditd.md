@@ -48,7 +48,8 @@ auditctl -a always,exit -S setrlimit.* -k setrlimits
 auditctl -a always,exit -S unlink -S rmdir -k deleting_files
 
 # watch for unsucessful calls
-# the -F flag filters out based on various options see man auditctl for more details
+# the -F flag filters out based on various
+# options see man auditctl for more details
 auditctl -a always,exit -S all -F sucess=0
 
 # make the default audit log buffer larger
