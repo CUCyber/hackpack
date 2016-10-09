@@ -26,7 +26,7 @@ Uncomplicated Firewall is based on iptables and therefore inherits iptables's fi
 ### Example Configuration
 
 ```sh
-#!/usr/bin/sh
+#!/bin/sh
 ufw default deny
 ufw allow ssh/tcp
 ufw logging on

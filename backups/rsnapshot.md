@@ -94,7 +94,7 @@ backup		root@example.local:/var/	example.local/
 
 #### /etc/cron.d/rsnapshot
 
-```cron
+```crontab
 0,15,30,45 * * * * root rsnapshot -c /etc/rsnapshot.d/application application
 8 * * * * root rsnapshot -c /etc/rsnapshot.d/system system
 ```
