@@ -1,8 +1,8 @@
 OUTFILE=hackpack.pdf
 
-FIND=./find.py
-
 TEMPLATE=./cyber.latex
+
+FIND=./find.py
 
 WEBSITE=../website
 
