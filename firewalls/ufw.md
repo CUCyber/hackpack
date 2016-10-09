@@ -1,9 +1,9 @@
-## UFW
+## Uncomplicated Firewall
 
 
 ### Config Files
 
-ufw references mainly the following files:
+Uncomplicated Firewall references mainly the following files:
 
 * /etc/default/ufw - high level configuration
 * /etc/ufw/sysctl.conf - kernel tunables
@@ -20,7 +20,7 @@ ufw references mainly the following files:
 
 ### Filtering
 
-UFW is based on iptables and therefore inherits iptables's first match rule.
+Uncomplicated Firewall is based on iptables and therefore inherits iptables's first match rule.
 
 
 ### Example Configuration
