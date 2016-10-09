@@ -24,4 +24,8 @@ $(OUTFILE): $(SOURCES)
 $(WEBSITE)/$(OUTFILE): $(OUTFILE)
 	cp $(OUTFILE) $(WEBSITE)/
 
+	git -C "$(WEBSITE)" add "$(OUTFILE)"
+	git -C "$(WEBSITE)" commit -m "update hackpack"
+	git -C "$(WEBSITE)" push
+
 .PHONY: all open update clean
