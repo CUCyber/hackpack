@@ -1,26 +1,27 @@
-OUTFILE='./hackpack.pdf'
+OUTFILE=hackpack.pdf
 
-FIND='./find.py'
+FIND=./find.py
 
-TEMPLATE='cyber.latex'
+TEMPLATE=./cyber.latex
 
-WEBSITE='../website'
+WEBSITE=../website
+
+SOURCES=$(shell "$(FIND)" -e 'LICENSE.md' -e 'README.md' -f general -l appendix -g index.md .)
 
 all: $(OUTFILE)
 
 open: $(OUTFILE)
-	xdg-open $(OUTFILE) &>/dev/null & disown
+	xdg-open "$(OUTFILE)" &>/dev/null & disown
 
 update: $(WEBSITE)/$(OUTFILE)
 
 clean:
-	rm -rf $(BUILDDIR)
-	rm -f $(OUTFILE)
+	rm -f "$(OUTFILE)"
 
-$(OUTFILE):
-	pandoc --template=$(TEMPLATE) --standalone --toc --output $(OUTFILE) $$($(FIND) -e 'LICENSE.md' -e 'README.md' -f general -l appendix -g index.md .)
+$(OUTFILE): $(SOURCES)
+	pandoc --template="$(TEMPLATE)" --standalone --toc --output "$(OUTFILE)" $^
 
-$(WEBSITE)/$(OUTFILE):
+$(WEBSITE)/$(OUTFILE): $(OUTFILE)
 	cp $(OUTFILE) $(WEBSITE)/
 
 .PHONY: all open update clean
