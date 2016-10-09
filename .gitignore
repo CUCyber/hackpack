@@ -1,6 +1,1 @@
-build
-*.bbl
-*.run
-*.exe
-*.o
-.DS_Store
+hackpack.pdf

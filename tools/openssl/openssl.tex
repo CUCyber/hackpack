@@ -1,9 +1,0 @@
-\section{OpenSSL}\index{openssl}
-
-OpenSSL is a toolkit for the TLS protocol and a general purpose cryptography library.
-
-\subsection{Generate TLS Certificates}
-
-Below is a command to generate a key file and TLS certificate for use in Apache. Copy the generated files to the appropriate place (e.g. \lstinline|/etc/httpd/conf/ssl.key/| and \lstinline|/etc/httpd/conf/ssl.crt/|) and make them writable only by root and readable by the web server group (e.g. \lstinline|chown -R root:httpd /etc/httpd/conf/ssl.{key,crt} && chmod 640 /etc/httpd/conf/ssl.{key,crt}|).
-
-\acmlisting[caption=Generate TLS Certificate, label=Generate TLS Certificate]{./tools/openssl/scripts/certificate.sh}
