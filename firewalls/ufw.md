@@ -5,8 +5,8 @@
 
 Uncomplicated Firewall references mainly the following files:
 
-* /etc/default/ufw - high level configuration
-* /etc/ufw/sysctl.conf - kernel tunables
+* '/etc/default/ufw' - high level configuration
+* '/etc/ufw/sysctl.conf' - kernel tunables
 
 
 ### Commands

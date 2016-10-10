@@ -7,10 +7,10 @@ BIND is a common, featured DNS server. To make it more secure and less vulnerabl
 
 The configuration for BIND is usually stored in either:
 
-* /etc/bind/ (Debian-based distributions)
-* /etc/named/ (other distributions)
-* /etc/named.conf (RedHat-based distributions)
-* /var/named/ (RedHat-based distributions)
+* '/etc/bind/' (Debian-based distributions)
+* '/etc/named/' (other distributions)
+* '/etc/named.conf' (RedHat-based distributions)
+* '/var/named/' (RedHat-based distributions)
 
 Utilize the named-checkconf utility to check configuration before applying it.
 

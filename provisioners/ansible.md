@@ -175,7 +175,7 @@ Here is how a sample role, in this case a webserver are stored:
 
 #### Ansible Vault
 
-Ansible has a means of creating AES encrypted files for use of storing configuration. To create a file use `ansible-vault create <filename>` To edit a file use `ansible-vault edit <filename>` which will open the file un-encrypted in the user's 'EDITOR' and re-encrypt it after editing. It can be used for file containing variables and files that are part of roles.
+Ansible has a means of creating AES encrypted files for use of storing configuration. To create a file use `ansible-vault create <filename>` To edit a file use `ansible-vault edit <filename>` which will open the file un-encrypted in the user's `EDITOR` and re-encrypt it after editing. It can be used for file containing variables and files that are part of roles.
 
 
 #### Extending Ansible

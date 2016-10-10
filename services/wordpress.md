@@ -5,7 +5,7 @@ Wordpress is a PHP content management system. It has reasonable security in a ne
 
 ### Setup
 
-Download the latest tarball available at 'https://wordpress.org/latest.tar.gz' and untar it into the document root (i.e. /var/www). Create and configure the necessary using the following SQL commands.
+Download the latest tarball available at 'https://wordpress.org/latest.tar.gz' and untar it into the document root (i.e. '/var/www'). Create and configure the necessary using the following SQL commands.
 
 ```sql
 CREATE USER wordpress@localhost IDENTIFIED BY 'password';
@@ -25,7 +25,8 @@ Navigate to the setup page at 'http://localhost/wordpress/' and follow the setup
 	- '/wp-content/plugins' needs to be writable only by the owning user account (e.g. 'www')
 * Remove unnecessary database permissions
 	- reduce database permissions for the SQL user by running the following command, replacing `wordpress.*` with the Wordpress tables and `wordpress@localhost` with the Wordpress user if necessary.
-	- `REVOKE ALL PRIVILEGES ON wordpress.* from wordpress@localhost; GRANT SELECT,INSERT,UPDATE,DELETE ON wordpress.* TO wordpress@localhost; FLUSH PRIVILEGES;`
+	- `REVOKE ALL PRIVILEGES ON wordpress.* from wordpress@localhost;`
+	- `GRANT SELECT,INSERT,UPDATE,DELETE ON wordpress.* TO wordpress@localhost; FLUSH PRIVILEGES;`
 * Disable file editing from wp-admin
 	- add `define('DISALLOW_FILE_EDIT', true);` to 'wp-config.php'
 * Move 'wp-config.php' to the directory above the Wordpress root

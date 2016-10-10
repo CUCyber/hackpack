@@ -5,7 +5,7 @@ Rsyslog is a client and server that conforms to the syslog protocol. On systems 
 
 ### Config Files
 
-Rsyslog is generally configured by /etc/syslog.conf and /etc/syslog.conf.d/ most other syslog daemons.
+Rsyslog is generally configured by '/etc/syslog.conf' and '/etc/syslog.conf.d/' like most other syslog daemons.
 
 
 #### /etc/syslog.conf

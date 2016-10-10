@@ -27,5 +27,6 @@ EOF
 chown root:root /etc/sudoers
 chmod 600 /etc/sudoers
 
-# be sure to add administrators back to 'wheel' and merge stuff from '/etc/sudoers~' and '/etc/sudoers.d~/'
+# be sure to add administrators back to 'wheel' and
+# merge stuff from '/etc/sudoers~' and '/etc/sudoers.d~/'
 ```

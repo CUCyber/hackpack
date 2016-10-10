@@ -5,9 +5,9 @@
 
 iptables stores the majority of its configuration in a series of files:
 
-* /etc/sysconfig/iptables - iptables configuration (RedHat-based distributions)
-* /etc/iptables - iptables configuration (Debian-based distributions)
-* /etc/services - an optional file that maps service names to port numbers
+* '/etc/sysconfig/iptables' - iptables configuration (RedHat-based distributions)
+* '/etc/iptables' - iptables configuration (Debian-based distributions)
+* '/etc/services' - an optional file that maps service names to port numbers
 
 
 ### Commands

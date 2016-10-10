@@ -21,23 +21,23 @@ SSH or Secure Shell is a remote administration protocol. It allows the user to s
 
 Important system level configuration directories and files:
 
-* /etc/sshd/sshd\_config - daemon configuration
-* /etc/hosts.equiv - used for insecure host based authentication; remove when found
-* /etc/shosts.equiv - used for insecure host based authentication; remove when found
-* /etc/ssh/ssh\_known\_hosts - system wide list of host keys
-* /etc/ssh/ssh\_host\_\*key - private keys used for host-based authentication and fingerprints
-* /etc/ssh/sshrc - commands that are executed when the user logs on
+* '/etc/sshd/sshd\_config' - daemon configuration
+* '/etc/hosts.equiv' - used for insecure host based authentication; remove when found
+* '/etc/shosts.equiv' - used for insecure host based authentication; remove when found
+* '/etc/ssh/ssh\_known\_hosts' - system wide list of host keys
+* '/etc/ssh/ssh\_host\_\*key' - private keys used for host-based authentication and fingerprints
+* '/etc/ssh/sshrc' - commands that are executed when the user logs on
 
 Important user level configuration directories and files:
 
-* ~/.rhosts - used for insecure host based authentication; remove when found
-* ~/.shosts - used for insecure host based authentication; remove when found
-* ~/.ssh/known\_hosts - list of hosts that are not already in /etc/ssh/ssh\_known\_hosts
-* ~/.ssh/authorized\_keys/ - list of keys that can be used to authenticate as this user
-* ~/.ssh/config - per user configuration options for ssh
-* ~/.ssh/environment - environment options for the user
-* ~/.ssh/id\*.pub - public key for the user
-* ~/.ssh/id\* - private key for the user
+* '~/.rhosts' - used for insecure host based authentication; remove when found
+* '~/.shosts' - used for insecure host based authentication; remove when found
+* '~/.ssh/known\_hosts' - list of hosts that are not already in /etc/ssh/ssh\_known\_hosts
+* '~/.ssh/authorized\_keys' - list of keys that can be used to authenticate as this user
+* '~/.ssh/config' - per user configuration options for ssh
+* '~/.ssh/environment' - environment options for the user
+* '~/.ssh/id\*.pub' - public key for the user
+* '~/.ssh/id\*' - private key for the user
 
 
 ### Configuration

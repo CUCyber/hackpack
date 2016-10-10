@@ -15,7 +15,7 @@ For each system:
 * Check mount/nfs if it is running
 * Install updates
 * Run a full system backup
-* Check/Configure sudo and /etc/sudoers.d
+* Check/Configure '/etc/sudoers' and '/etc/sudoers.d/*'
 * Harden the service for your machine
 * Install/Configure a firewall
 * Write an audit report containing changes made

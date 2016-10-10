@@ -125,6 +125,6 @@ FLUSH PRIVILEGES;
 #### Securing
 
 * Make sure it is only listening on localhost unless remote access is required by an inject (or the scoring engine) or you are running the webapps on a different server
-* Look for bind-address in the [mysqld] section and ensure it is set to 127.0.0.1 for allowing local connections only or 0.0.0.0 for allowing remote connections
-* Disable the LOCAL INFILE queries, which allows someone (i.e. red team) to upload files from their computers into your database, by adding local-infile = 0 to the [mysqld] section of the conf file
+* Look for `bind-address` in the `[mysqld]` section and ensure it is set to `127.0.0.1` for allowing local connections only or `0.0.0.0` for allowing remote connections
+* Disable the `LOCAL INFILE` queries, which allows someone (i.e. red team) to upload files from their computers into your database, by adding `local-infile = 0` to the `[mysqld]` section of the config file
 * Restart MySQL after making any configuration changes

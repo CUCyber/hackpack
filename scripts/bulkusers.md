@@ -12,6 +12,9 @@ foreach ($User in $Users)
     $SAM = $User.SAM
     $UPN = $User.Email
     $Password = "CUCyber9."
-    New-ADUser -Name "$Displayname" -DisplayName "$Displayname" -GivenName "$UserFirstname" -Surname "$UserLastname" -SamAccountName $SAM -AccountPassword (ConvertTo-SecureString $Password -AsPlainText -Force) -Enabled $true -ChangePasswordAtLogon $true
+    New-ADUser -Name "$Displayname" -DisplayName "$Displayname" `
+        -GivenName "$UserFirstname" -Surname "$UserLastname" -SamAccountName $SAM `
+        -AccountPassword (ConvertTo-SecureString $Password -AsPlainText -Force) `
+        -Enabled $true -ChangePasswordAtLogon $true
 }
 ```

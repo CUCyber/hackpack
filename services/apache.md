@@ -9,13 +9,13 @@ There is a large variety of steps that are important for securing Apache.
 
 * Install Mod Security either from repos or from www.modsecurity.org
 * Configure the Apache to use the Mod Security core rules from the repos or www.modsecurity.org
-* Remove unnecessary options and text from Apache's httpd.conf file and /etc/httpd/conf.d (sometimes located at /etc/apache2/conf/extra)
+* Remove unnecessary options and text from Apache's httpd.conf file and '/etc/httpd/conf.d' (sometimes located at '/etc/apache2/conf/extra')
 * Remove all unnessisary modules entries from Apache's httpd.conf file
 * Create an Apache user and group without a shell
 * Configure Apache to run using this user and group
 * Restrict access to the webserver via the Order allow,deny line in httpd.conf
 * Prevent access to root file system
-* Allow only read access to web directory /var/www/html
+* Allow only read access to web directory '/var/www/html'
 * Disable the following functionality if possible:
 	- ExecCGI - Allow scripts to be run by apache from this directory.
 	- FollowSymLinks - allow the server to follow symlinks

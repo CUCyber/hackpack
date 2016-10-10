@@ -5,8 +5,8 @@
 
 pf references the following files:
 
-* /etc/rc.conf - as with all servies, pf must be enabled here
-* /etc/pf.conf - pf configuration file
+* '/etc/rc.conf' - as with all servies, pf must be enabled here
+* '/etc/pf.conf' - pf configuration file
 
 
 ### Commands
@@ -20,7 +20,7 @@ pf uses the following binaries:
 
 ### Filtering
 
-All of the configuration for pf is stored in /etc/pf.conf. There is no way to modify the running configuration except to overwrite the running configuration with the saved configuration. Unlike other firewalls, the last rule to match will be the rule that is applied. This behavior can be overridden by using the `quick` keyword.
+All of the configuration for pf is stored in '/etc/pf.conf'. There is no way to modify the running configuration except to overwrite the running configuration with the saved configuration. Unlike other firewalls, the last rule to match will be the rule that is applied. This behavior can be overridden by using the `quick` keyword.
 
 
 ### Example Configuration
