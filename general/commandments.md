@@ -3,7 +3,7 @@
 1. Thou shalt NEVER trust the red team
 1. Thou shalt trust but verify everything else
 2. Thou shalt know thy network
-3. Thou shalt patch your services
+3. Thou shalt patch thy services
 4. Thou shalt make frequent backups
 5. Thou shalt disable unused services
 6. Thou shalt set and use strong passwords
