@@ -23,7 +23,7 @@ FirewallD is the new Linux firewall from RedHat. It provides a usability layer o
 
 Zones are affiliated with source addresses or interfaces. Zones have short names they are referenced by.
 
-The following zone example affects all incoming traffic with the enp0s3 interface. It allows HTTPS traffic defined in the /usr/lib/firewalld/services/https.xml or overwritten in /etc/firewalld/services/https.xml. It also blocks traffic on the 10.0.0.0/8 subnet by dropping and logging the packets.
+The following zone example affects all incoming traffic on the enp0s3 interface. It allows HTTPS traffic defined in the /usr/lib/firewalld/services/https.xml or overwritten in /etc/firewalld/services/https.xml. It also blocks traffic on the 10.0.0.0/8 subnet by dropping and logging the packets.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
