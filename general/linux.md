@@ -13,15 +13,14 @@ For each system:
 * Create a report of open ports
 * Audit user, groups for invalid entries
 * Check mount/nfs if it is running
-* Install Updates
+* Install updates
 * Run a full system backup
 * Check/Configure sudo and /etc/sudoers.d
 * Harden the service for your machine
 * Install/Configure a firewall
 * Write an audit report containing changes made
-* Configure ansible
 
 For all systems:
 
 * Scan the subnet for running servers
-* Configure a provisioner such as Salt/Ansible master
+* Configure a provisioner such as Salt/Ansible
