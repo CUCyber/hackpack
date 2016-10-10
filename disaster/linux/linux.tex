@@ -1,0 +1,36 @@
+\section{Linux}\index{grub}\index{locked out}
+
+Its happened, Red Team has completely hosed your box.  Here are some of the worst things that they can do, and how to hopefully recover:
+
+\subsection{Invalid password}
+The red team has changed the password to the root account.
+
+\begin{enumerate}
+	\item Reboot the box.
+	\item Press ``e'' to edit the kernel command line
+	\item Add the option to \lstinline|init=/bin/bash| to the line that says linux
+	\item Mount the root filesystem \lstinline|mount -o remout,rw /|
+	\item Use vi to edit the \lstinline|/etc/passwd| file, and remove the "x" between the 2nd and 3rd colon on the root user
+	\item Write the file, and reboot
+	\item The root user should now not have a password
+\end{enumerate}
+
+\subsection{Chmod not executable}
+
+This initially wouldn't seem like it is too bad, but the problem is that bash does not provide a builtin to fix this.
+This can be particularly devious if the entire root directory is marked no executable.
+If the entire file system is not executable, you are looking at a live CD or a Slave mounting the drive.
+
+There are a few options here roughly sorted by time to fix:
+
+\begin{itemize}
+	\item Use a programming language like python, perl, or C to write your own chown command to fix chown
+	\item Use the linker directly \lstinline|/lib/ld-*.so /bin/chmod 755 /bin/chmod| as root 
+	\item Use a shell like busybox, zsh, or ksh that provides a builtin chmod
+	\item Reinstall chmod from repos, or a working machine
+	\item Dump the bits of the binary and manually edit the permission bits
+	\item Use a live CD
+	\item Power off the machine, remove the hard drive, slave mount it to a different machine that has a working chroot, mount the drive and fix it
+\end{itemize}
+
+\acmlisting[label=chmod, caption=chmod]{disaster/linux/scripts/chmod.examples}
