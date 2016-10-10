@@ -14,16 +14,16 @@ systemctl start auditd
 
 ### Config Files
 
-The user space auditing commands, can be used to configure logs. Audit can stores its rules in /etc/audit/audit.rules or in files inside /etc/audit/audit.d/. The syntax for these files is the same as the user space commands.
+The userspace auditing commands, can be used to configure logs. Audit can stores its rules in /etc/audit/audit.rules or in files inside /etc/audit/audit.d/. The syntax for these files is the same as the userspace commands.
 
 
 ### Commands
 
 Viewing the auditlog can be done in a few ways:
 
-* aureport - query logs for a specific event
-* ausearch - view a summary of recent events
-* syslog - view logs typically stored in /var/log/audit/audit.log
+* `aureport` - query logs for a specific event
+* `ausearch` - view a summary of recent events
+* `syslog` - view logs typically stored in /var/log/audit/audit.log
 
 
 ### Example Configuration
