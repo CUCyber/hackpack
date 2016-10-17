@@ -1,6 +1,6 @@
 ## Bulk Users
 
-The following scripts takes an accounts.csv file with headers 'Firstname,Lastname,SAM,Email' and adds them to the current active directory.
+The following scripts takes an accounts.csv file with headers 'Firstname,Lastname,SAM,Email' and adds them to the current Active Directory.
 
 ```powershell
 $Users = Import-Csv -Path "accounts.csv"
