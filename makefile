@@ -7,7 +7,7 @@ FIND=./find.py
 
 WEBSITE=../website
 
-SOURCES=$(shell "$(FIND)" -e 'LICENSE.md' -e 'README.md' -f general -l appendix -g index.md .)
+SOURCES=$(shell "$(FIND)" -e 'LICENSE.md' -e 'README.md' -f general -f checklist -l appendix -g index.md .)
 
 all: $(OUTFILE)
 
