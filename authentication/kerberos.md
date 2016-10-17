@@ -52,7 +52,8 @@ net ads status -U administrator
 
 # configure PAM with the following config.
 
-# modify applications as necessary to use Kerberos; see the specific application for documentation
+# modify applications as necessary to use Kerberos
+# see the specific application for documentation
 
 # finally configure smb shares and keytabs if desired using the following
 ```
