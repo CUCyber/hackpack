@@ -1,6 +1,7 @@
 OUTFILE=hackpack.pdf
 
 TEMPLATE=./cyber.latex
+HIGHLIGHT_STYLE=tango
 
 FIND=./find.py
 
@@ -19,7 +20,7 @@ clean:
 	rm -f "$(OUTFILE)"
 
 $(OUTFILE): $(SOURCES)
-	pandoc --template="$(TEMPLATE)" --standalone --toc --output "$(OUTFILE)" $^
+	pandoc --template="$(TEMPLATE)" --highlight-style="${HIGHLIGHT_STYLE}" --standalone --toc --output "$(OUTFILE)" $^
 
 $(WEBSITE)/$(OUTFILE): $(OUTFILE)
 	cp $(OUTFILE) $(WEBSITE)/
