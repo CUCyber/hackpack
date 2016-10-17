@@ -53,7 +53,7 @@ There is a large variety of steps that are important for securing Apache.
 
 ```sh
 #!/bin/sh
-makedir -p /jail/apache/usr/local
+mkdir -p /jail/apache/usr/local
 cd /usr/local
 mv apache /jail/apache/usr/local
 
