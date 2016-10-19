@@ -1,90 +1,50 @@
 #!/usr/bin/env python3
-import argparse
+# -*- coding: utf-8 -*-
+
 import os
-import os.path
+import argparse
+import itertools
 
-parser = argparse.ArgumentParser(description='find all relevant files to include in a hackpack')
-parser.add_argument('-e', '--exclude', action='append', dest='exclude', default=[], help='file to exclude')
-parser.add_argument('-f', '--first', action='append', dest='first', default=[], help='folders to place first')
-parser.add_argument('-l', '--last', action='append', dest='last', default=[], help='folders to place last')
-parser.add_argument('-g', '--first-file', action='append', dest='first_file', default=[], help='files to place first')
-parser.add_argument('-m', '--last-file', action='append', dest='last_file', default=[], help='files to place last')
-parser.add_argument('dir', nargs='?', default='.', help='scan directory')
+def parse_args():
+    """parse arguments"""
+    parser = argparse.ArgumentParser(description='find all relevant files to include in a hackpack')
 
-args = parser.parse_args()
+    parser.add_argument('-e', '--exclude', action='append', dest='exclude', default=[], help='file to exclude')
+    parser.add_argument('-f', '--first', action='append', dest='first', default=[], help='folders to place first')
+    parser.add_argument('-g', '--first-file', action='append', dest='first_file', default=[], help='files to place first')
+    parser.add_argument('-l', '--last', action='append', dest='last', default=[], help='folders to place last')
+    parser.add_argument('-m', '--last-file', action='append', dest='last_file', default=[], help='files to place last')
+    parser.add_argument('dir', nargs='?', default='.', help='scan directory')
 
-for idx, name in enumerate(args.exclude):
-    args.exclude[idx] = os.path.join(args.dir, name)
+    return parser.parse_args()
 
-args.first.reverse()
-args.first_file.reverse()
+def find_files(first_dirs, first_files, last_files, last_dirs, root_dir, excludes):
+    excludes = set(excludes)
 
-docs = []
+    for root, dirs, files in os.walk(root_dir):
+        all_files = set(files) - excludes
+        #use lists to preserve order and to allow multiple iterations
+        ffiles = [i for i in first_files if i in all_files]
+        lfiles = [i for i in last_files if i in all_files]
+        rfiles = sorted((all_files - set(ffiles)) - set(lfiles))
 
-for root, dirs, files in os.walk(args.dir):
-    # handle files in order
-    files.sort()
+        for doc in itertools.chain(ffiles,rfiles,lfiles):
+            if doc.endswith(".md"):
+                yield os.path.join(root,doc)
 
-    # move first files
-    for name in args.first_file:
-        try:
-            idx = files.index(name)
+        all_dirs = set(dirs)
+        fdirs = [i for i in first_dirs if i in all_dirs]
+        ldirs = [i for i in last_dirs if i in all_dirs]
+        rdirs = sorted((all_dirs - set(fdirs)) - set(ldirs))
 
-            path = os.path.join(root, name)
-            if path not in args.exclude:
-                del files[idx]
+        #dirs must be modified in-place for os.walk
+        dirs[:] = itertools.chain(fdirs,rdirs,ldirs)
 
-                files.insert(0, name)
-        except ValueError:
-            pass
+def main():
+    args = parse_args()
+    files = find_files(args.first, args.first_file, args.last_file,
+                       args.last, args.dir, args.exclude)
+    print(' '.join(files))
 
-    # move last files
-    for name in args.last_file:
-        try:
-            idx = files.index(name)
-
-            path = os.path.join(root, name)
-            if path not in args.exclude:
-                del files[idx]
-
-                files.append(name)
-        except ValueError:
-            pass
-
-    # handle files in directory before subdirectories
-    for name in files:
-        if name.endswith('.md'):
-            path = os.path.join(root, name)
-            if path not in args.exclude:
-                docs.append(path)
-
-    # handle subdirectories in order
-    dirs.sort()
-
-    # move first directories
-    for name in args.first:
-        try:
-            idx = dirs.index(name)
-
-            path = os.path.join(root, name)
-            if path not in args.exclude:
-                del dirs[idx]
-
-                dirs.insert(0, name)
-        except ValueError:
-            pass
-
-    # move last directories
-    for name in args.last:
-        try:
-            idx = dirs.index(name)
-
-            path = os.path.join(root, name)
-            if path not in args.exclude:
-                del dirs[idx]
-
-                dirs.append(name)
-        except ValueError:
-            pass
-
-print(' '.join(docs))
+if __name__ == "__main__":
+    main()
