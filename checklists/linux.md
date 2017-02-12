@@ -8,44 +8,52 @@ For each system:
 	- `cat /etc/passwd`
 * Change the password for the root account
 	- `which passwd`
-	- `cat [path to passwd]`
-	- `passwd [user]`
+	- `cat <path to passwd>`
+	- `passwd <user>`
 * Check for improper ssh config
 	- `ls ~/.ssh`
 * Check for improper sshd config
 	- `/etc/ssh/sshd_config`
-* Check the crontab (s) for running tasks
-	- `crontab -e` or `crontab -l`
-	- NOTHING SHOULD BE THERE
-* Check with files with wider permissions and setuid
-	- sticky bit: `find [dir] -perm -u=s`
-	- `find [dir] -perm -o=w`
-* Create a report of running services and processes and disable unnecessary processes
+* Check the crontab(s) for running tasks
+	- `crontab -l`
+	- `crontab -e`
+	- not much should be there
+* Check for files with wide permissions and setuid
+	- sticky bit: `find <dir> -perm -u=s`
+	- world writable: `find <dir> -perm -o=w`
+* Create a report of running processes
 	- `ps aux`
-* Create a report of open ports
+* Create a report of running services
 	- `ss -tlnp`
 	- `ss -ulnp`
-* Audit user, groups for invalid entries
+* Audit users and groups for invalid entries
+	- `cat /etc/passwd`
+	- `cat /etc/shadow`
 	- `cat /etc/group`
-* Check mount/nfs if it is running
+* Check mounted filesystems
 	- `lsblk`
-* Install updates
-	- update important things, not the whole system
-		+ openssl
-		+ openssh
-		+ * server
-		+ kernel (maybe)
+* Install important system and security updates
+	- OpenSSL
+	- OpenSSH
+	- web server
+	- file server
+	- mail server
+	- DNS server
+	- Linux kernel (not necessarily to latest major version but to latest security update) - requires reboot
 * Run a full system backup
-	- run script from hackpack
-* Check/Configure '/etc/sudoers' and '/etc/sudoers.d/\*'
-* Harden the service for your machine
-	- check for misconfigured files
-* Install/Configure a firewall
+	- See 'Backups and Restoration' -> 'Simple Backups'
+* Check and configure '/etc/sudoers' and '/etc/sudoers.d/\*'
+* Harden the service(s) for your machine
+	- Check for misconfigured files
+* Install and configure a firewall
+* Check filesystem for proper layout and for any odd files
+	- See 'Filesystem Layout and Locations' -> 'Linux Filesystem Hierarchy'
 * Write an audit report containing changes made
 
 For all systems:
 
 * Scan the subnet for running servers
+
 
 ### In-Depth Hardening
 
@@ -60,66 +68,6 @@ For all systems:
 * Set hard core limit to `0` in '/etc/security/limits.conf'
 * Disable Rarely Used Filesystems and Protocols
 
-## Directory Hierarchy
-
-* `/etc
-	- Back me up
-	- configuration files
-	- notable files
-		+ passwd
-		+ shadow
-		+ group
-		+ pam.d
-		+ sudoers
-		+ crontab
-		+ cron.d
-	- service configurations
-		+ sshd
-		+ httpd
-		+ apache2
-		+ nginx
-* `/var`
-	- Back me up
-	- databases
-	- logs
-	- webpage files `/var/www`
-* `/tmp`
-	- Temporary files will be here typically gone by the next reboot
-	- Sockets will also be in temp 
-		+ If you find .X11-unix close it
-		+ ice-unix close it
-* `/home`
-	- User home dirs
-		+ User data files
-	- Some user system datafiles will be located in var, these are typcally
-	for service users
-* `/root`
-	- Roots home dir
-* `/bin`
-	- Core exe's for running the system
-	- Coreutils
-* `/opt`
-	- Special programs, programs that are not system level
-* `/usr`
-	- Non-critical system programs go
-	- Has its own bin, lib, libexec, usr/share
-	- /usr/share
-		+ Place for files that don't go in /etc or /var
-* `/lib`
-	- Core library file 
-* `/libexec`
-	- look here
-	- Scripts shouldn't be here
-* `/proc`
-	- Information on processes
-	- Red teams will go here to see if they can manipulate the processes
-	- Central to how linux works
-* `/dev`
-	- Central to how linux works
-	- Red teams will go here to see if they can manipulate things
-* `/sys`
-	- sysctls stuff
-	- Typically not much useful information
 
 #### Modprobe
 
@@ -143,7 +91,7 @@ install tipc /bin/true
 
 #### Sysctl
 
-* Use `sysctl kernel.randomize_va_space = 2`
+* Enable ASLR `/sbin/sysctl kernel.randomize_va_space = 2`
 * Disable network forwarding `/sbin/sysctl -w net.ipv4.ip_forward  0`
 * Disable packet redirects `/sbin/sysctl -w net.conf.default.send_redirects  0`
 * Flush packet redirects `/sbin/sysctl -w net.ipv4.conf.all.send_redirects  0`
@@ -162,65 +110,67 @@ install tipc /bin/true
 * Log suspicious packets `/sbin/sysctl -w net.ipv4.conf.all.log_martians 1`
 * Log suspicious packets `/sbin/sysctl -w net.ipv4.conf.default.log_martians 1`
 * Flush routing tables `/sbin/sysctl -w net.ipv4.route.flush  1`
-* Disable ipv6 router advertisements `/sbin/sysctl -w net.ipv6.conf.all.accept_ra 0`
-* Disable ipv6 router advertisements `/sbin/sysctl -w net.ipv6.conf.default.accept_ra 0`
-* Disable ipv6 redirect acceptance `/sbin/sysctl -w net.ipv5.confi.all.accept_redirects 0`
-* Disable ipv6 redirect acceptance `/sbin/sysctl -w net.ipv5.confi.default.accept_redirects 0`
+* Disable IPv6 router advertisements `/sbin/sysctl -w net.ipv6.conf.all.accept_ra 0`
+* Disable IPv6 router advertisements `/sbin/sysctl -w net.ipv6.conf.default.accept_ra 0`
+* Disable IPv6 redirect acceptance `/sbin/sysctl -w net.ipv5.confi.all.accept_redirects 0`
+* Disable IPv6 redirect acceptance `/sbin/sysctl -w net.ipv5.confi.default.accept_redirects 0`
 
 
 #### Authentication
 
-* Do not allow '.' to be in root's `PATH`
-* Disable shell on non-used users
+* Do not allow '.' to be in root's `PATH` environment variable (check in '/etc/login.defs', '/etc/profile', and '/etc/profile.d')
+* Set the shell on unused users to '/bin/nologin'
 * Ensure '/etc/passwd' is `root:root` `0600` and contains no lines of +
 * Ensure '/etc/group' is `root:root` `0600` and contains no lines of +
 * Ensure '/etc/shadow' is `root:root` `0600` and contains no lines of +
-* Check that all groups in '/etc/passwd' are in '/etc/groups' and visa-versa
 * Ensure users own thier home directories with sane permissions
 * Use PAM
 	- Configure `pam_cracklib retry=3 minlen=14 dcredit=-1 ucredit=-1 ocredit=-1 lcredit=-1`
 	- Configure `pam_unix obscure sha512 remember=5`
 	- No empty passwords
 * Restrict access to su
-    `echo "auth required pam_wheel.so use_uid" >> /etc/pam.d/su`
+	- `echo "auth required pam_wheel.so use_uid" >> /etc/pam.d/su`
 * Use '/etc/login.defs'
 	- Set `PASS_MAX_DAYS`, `PASS_MIN_DAYS`, `PASS_WARN_DAYS`
-* Verify root is the only uid `0` account - also check other accounts
+* Verify root is the only uid `0` account
+* Verify root, sync, shutdown, halt, and operator are the only gid `0` accounts
 * Verify no duplicate gid
 * Verify no duplicate usernames or group names
 * Delete all '.forward' files
-* Ensure shadow group is empty
-* Check for '.rhosts', '.netrc'
+* Ensure 'shadow' group is empty
+* Check for '.rhosts' and '.netrc'
 
 
 #### Permissions
 
 * No world writable files
+	- `find / -perm -o=w`
 * Find un-owned files
+	- `find / -nouser -o -nogroup`
 * Find suid binaries
-	- find -r / -perm -u=s
+	- `find / -perm -u=s`
 * Find sgid binaries
-	- find -r / -perm -g=s
-* Use a umask of 077 to prohibit users from reading files that are not theirs
-* Ensure bootloader config, '/boot/grub/grub.cfg', is `root:root` `0600`
+	- `find / -perm -g=s`
+* Use a umask of 077 to prohibit users from reading files that are not theirs (see '/etc/profile')
+* Ensure bootloader config, '/boot/grub/grub.cfg', is owned by `root:root` and has permissions `0600`
 
 
 #### Programs
 
 * If `prelink` is installed, run `/usr/sbin/prelink -ua` and uninstall it
 * Where possible, uninstall Xorg
-* Ensure rshd,rlogind,rexecd,talk,telnet,tftp,xinetd,chargen,daytime,echo,discard,avahi,cupsd,isc-dhcp-server,ldap,nfs,rpc,bind,vsftpd,apache,dovecot,smbd,squid3,snmp,rsyncd are disabled, preferably uninstalled where possible
+* Ensure rshd, rlogind, rexecd, talk, telnet, tftp, xinetd, chargen, daytime, echo, discard, avahi, cupsd, isc-dhcp-server, ldap, nfs, rpc, bind, vsftpd, apache, dovecot, smbd, squid3, snmp, rsyncd are disabled, and preferably uninstalled, where possible
 * Configure ntp
 * Create '/etc/hosts.{allow,deny}' files with permissions 0644
 * Disable wireless on wired devices
 * Ensure a firewall is running
 * Use install and use auditd
-	- Set `max_log_file = <SOME_NUMBER_OF_MB>`
+	- Set `max_log_file = <megabytes>`
 	- Use audit to detect time changes, user and group changes, network changes, AppArmor/SELinux, login/logout, sessions, changes to file permissions, unautorized access attempts, priviliged commands, successful mounts, file deletion events, sudoers, kernel module changes
-* Use and install rsyslog and configure it to save logs to '/var/log' with appropriate permissions `root:root` `0600`
+* Use and install rsyslog and configure it to save logs to '/var/log' with appropriate permissions, usually `root:root` `0600`
 	- Consolidate logs if possible with remote logging
 * Use AIDE/Tripwire
-* Use Cron to where necessary with `root:root` `0600` permissions
+* Use cron where necessary with `root:root` `0600` permissions
 * Setup SSH
 	- Set enviroment options No
 	- Prohibit inactive sessions
