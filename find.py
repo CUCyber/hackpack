@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import os
-import argparse
 import itertools
 
 
@@ -26,7 +25,9 @@ def find_files(first_dirs, first_files, last_files, last_dirs, root_dir, exclude
         dirs[:] = itertools.chain(fdirs, rdirs, ldirs)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
+    import argparse
+
     parser = argparse.ArgumentParser(description='find all relevant files to include in a hackpack')
 
     parser.add_argument('-e', '--exclude', action='append', dest='exclude', default=[], help='file to exclude')
