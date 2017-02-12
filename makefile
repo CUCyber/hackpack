@@ -1,3 +1,5 @@
+SHELL=/bin/bash
+
 OUTFILE=hackpack.pdf
 
 TEMPLATE=./cyber.latex
@@ -7,7 +9,7 @@ FIND=./find.py
 
 WEBSITE=../website
 
-SOURCES=$(shell "$(FIND)" -e 'LICENSE.md' -e 'README.md' -f general -f checklists -l appendix -g index.md .)
+SOURCES!="$(FIND)" -e 'LICENSE.md' -e 'README.md' -f general -f checklists -l appendix -g index.md .
 
 all: $(OUTFILE)
 
@@ -20,7 +22,7 @@ clean:
 	rm -f "$(OUTFILE)"
 
 $(OUTFILE): $(SOURCES)
-	pandoc --template="$(TEMPLATE)" --highlight-style="${HIGHLIGHT_STYLE}" --standalone --toc --output "$(OUTFILE)" $^
+	pandoc --template="$(TEMPLATE)" --highlight-style="${HIGHLIGHT_STYLE}" --standalone --toc --output "$(OUTFILE)" $(SOURCES)
 
 $(WEBSITE)/$(OUTFILE): $(OUTFILE)
 	cp $(OUTFILE) $(WEBSITE)/
