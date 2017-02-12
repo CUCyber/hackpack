@@ -4,27 +4,48 @@ This checklist is designed for the first 30 minutes of competition.
 
 For each system:
 
+* Check for users
+	- `cat /etc/passwd`
 * Change the password for the root account
+	- `which passwd`
+	- `cat [path to passwd]`
+	- `passwd [user]`
 * Check for improper ssh config
+	- `ls ~/.ssh`
 * Check for improper sshd config
+	- `/etc/ssh/sshd_config`
 * Check the crontab (s) for running tasks
+	- `crontab -e` or `crontab -l`
+	- NOTHING SHOULD BE THERE
 * Check with files with wider permissions and setuid
+	- sticky bit: `find [dir] -perm -u=s`
+	- `find [dir] -perm -o=w`
 * Create a report of running services and processes and disable unnecessary processes
+	- `ps aux`
 * Create a report of open ports
+	- `ss -tlnp`
+	- `ss -ulnp`
 * Audit user, groups for invalid entries
+	- `cat /etc/group`
 * Check mount/nfs if it is running
+	- `lsblk`
 * Install updates
+	- update important things, not the whole system
+		+ openssl
+		+ openssh
+		+ * server
+		+ kernel (maybe)
 * Run a full system backup
+	- run script from hackpack
 * Check/Configure '/etc/sudoers' and '/etc/sudoers.d/\*'
 * Harden the service for your machine
+	- check for misconfigured files
 * Install/Configure a firewall
 * Write an audit report containing changes made
 
 For all systems:
 
 * Scan the subnet for running servers
-* Configure a provisioner such as Salt/Ansible
-
 
 ### In-Depth Hardening
 
@@ -39,6 +60,66 @@ For all systems:
 * Set hard core limit to `0` in '/etc/security/limits.conf'
 * Disable Rarely Used Filesystems and Protocols
 
+## Directory Hierarchy
+
+* `/etc
+	- Back me up
+	- configuration files
+	- notable files
+		+ passwd
+		+ shadow
+		+ group
+		+ pam.d
+		+ sudoers
+		+ crontab
+		+ cron.d
+	- service configurations
+		+ sshd
+		+ httpd
+		+ apache2
+		+ nginx
+* `/var`
+	- Back me up
+	- databases
+	- logs
+	- webpage files `/var/www`
+* `/tmp`
+	- Temporary files will be here typically gone by the next reboot
+	- Sockets will also be in temp 
+		+ If you find .X11-unix close it
+		+ ice-unix close it
+* `/home`
+	- User home dirs
+		+ User data files
+	- Some user system datafiles will be located in var, these are typcally
+	for service users
+* `/root`
+	- Roots home dir
+* `/bin`
+	- Core exe's for running the system
+	- Coreutils
+* `/opt`
+	- Special programs, programs that are not system level
+* `/usr`
+	- Non-critical system programs go
+	- Has its own bin, lib, libexec, usr/share
+	- /usr/share
+		+ Place for files that don't go in /etc or /var
+* `/lib`
+	- Core library file 
+* `/libexec`
+	- look here
+	- Scripts shouldn't be here
+* `/proc`
+	- Information on processes
+	- Red teams will go here to see if they can manipulate the processes
+	- Central to how linux works
+* `/dev`
+	- Central to how linux works
+	- Red teams will go here to see if they can manipulate things
+* `/sys`
+	- sysctls stuff
+	- Typically not much useful information
 
 #### Modprobe
 
@@ -117,7 +198,9 @@ install tipc /bin/true
 * No world writable files
 * Find un-owned files
 * Find suid binaries
+	- find -r / -perm -u=s
 * Find sgid binaries
+	- find -r / -perm -g=s
 * Use a umask of 077 to prohibit users from reading files that are not theirs
 * Ensure bootloader config, '/boot/grub/grub.cfg', is `root:root` `0600`
 
