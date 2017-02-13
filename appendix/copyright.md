@@ -116,7 +116,7 @@ For the avoidance of doubt, this [Section 4](#Section-4) supplements and does no
 
 ### BSD 2-Clause
 
-Copyright (c) 2016, CU Cyber <cyber@clemson.edu>
+Copyright (c) 2017, CU Cyber <cyber@clemson.edu>
 
 All rights reserved.
 
@@ -144,7 +144,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 ### The MIT License
 
-Copyright (c) 2016, CU Cyber <cyber@clemson.edu>
+Copyright (c) 2017, CU Cyber <cyber@clemson.edu>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
