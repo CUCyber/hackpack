@@ -1,5 +1,5 @@
-CU Cyber Defense Hackpack
-=========================
+CU Cyber Hackpack
+=================
 
 In this repository are the markdown sources to the hackpack used by CU Cyber in general and at competitions.
 
@@ -51,7 +51,7 @@ $ sudo emerge git python:3.4 pandoc texlive-latexextra
 ## Downloading
 
 ```sh
-$ git clone https://github.com/CUCyber/defense-hackpack.git
+$ git clone https://github.com/CUCyber/hackpack.git
 ```
 
 
