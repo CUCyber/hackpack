@@ -16,6 +16,11 @@ Uncomplicated Firewall references mainly the following files:
 * ufw allow - allows service or port
 * ufw deny - blocks a service or port
 * ufw limit - allows with connection rate limiting
+* ufw status verbose - display the current firewall rules (if active)
+
+### Sample Usage
+* ufw allow 8080/tcp - adds a rule that allows incoming traffic on tcp port 22
+* ufw delete allow 8080/tcp - deletes the previous rule
 
 
 ### Filtering
