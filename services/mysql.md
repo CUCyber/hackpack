@@ -1,6 +1,6 @@
 ## MySQL
 
-MySql is a quick database for small to medium size organizations.
+MariaDB, and its predecessor MySQL, is a quick database for small to medium size organizations.
 
 
 ### Installation
