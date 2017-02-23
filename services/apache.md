@@ -60,3 +60,20 @@ mv apache /jail/apache/usr/local
 echo "SecChrootDir /jail/apache" >> $HTTPD_CONF
 /usr/local/apache/bin/apachectl startssl
 ```
+
+
+### Configuring SSL
+
+Modify the below snippet to your site's needs and add it to your configuration file.
+
+```apache
+LoadModule ssl_module modules/mod_ssl.so
+
+Listen 443
+<VirtualHost *:443>
+    ServerName www.example.com
+    SSLEngine on
+    SSLCertificateFile "/path/to/www.example.com.cert"
+    SSLCertificateKeyFile "/path/to/www.example.com.key"
+</VirtualHost>
+```
