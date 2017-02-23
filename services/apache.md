@@ -38,7 +38,7 @@ There is a large variety of steps that are important for securing Apache.
 	- LimitRequestFeilds 32 - Limit number of request fields
 	- LimitRequestFeildSize 8000 - Limit size of request lines
 	- LimitRequestLine 4000 - Maximum size of the request line
-* Use Mod\_SSL if possible (see openssl section for generating a sever certificate)
+* Use Mod\_SSL if possible (see OpenSSL section for generating a sever certificate)
 * Set ServerTokens to ProductOnly
 * Use custom error pages via the ErrorDocument directive
 * Remove default files and cgi-scripts

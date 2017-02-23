@@ -1,81 +1,59 @@
 ## Wireshark
 
-Wireshark is a GUI/Command line tool for network monitoring. This is a tool you can run to recreate network traffic (network replay). It can also be used to discover malicious traffic on a network. 
+Wireshark is a GUI and command line tool for network monitoring and analysis. You can use it to record and later analyze or recreate network traffic. You can also use it to find malicous traffic on the network. It can run with promiscuous mode, where all network traffic on the interface is recorded, or without it, where only network traffic originating from or going to the monitoring computer is recorded. It must be run as an administrator to capture traffic (`sudo -E wireshark-gtk` on Linux systems).
 
-
-### Running it on windows
-
-Run Wireshark as an administrator to listen on your devices, you do not need to run promiscuous mode unless you are trying to capture all traffic on the network
-
-
-### Running on Linux
-
-Run Wireshark with "sudo -E"
-
-```wireshark
-sudo -E Wireshark-gtk
-```
-
-### Interface
-
-Select the interface you would like Wireshark to listen on. In a competition this will typically be the ethernet interface
-
-Examples:
-```wireshark
-eth0, eth1, virt-eth0
-```
 
 ### Color Scheme
 
-In the traffic pane the traffic will be highlighted to correspond with different formats the following are the meanings
+In the traffic pane, the traffic will be highlighted to correspond with different types of packets.
 
-Green = TCP traffic
-Dark Blue = DNS traffic
-Light Blue = UDP traffic
-Black = TCP packets with problems
+* Green - TCP traffic
+* Dark Blue - DNS traffic
+* Light Blue - UDP traffic
+* Black - TCP packets with problems
+
 
 ### Filters
 
 ```wireshark
-#Bi direction capture
-#Capture packets to and from a specific host IPv4 or IPv6 format
+# bidirection capture
+# capture IPv4 or IPv6 packets to and from a specific host
 host 192.168.1.1
 
-#Capture packets to and from a range of IPs in CIDR format
+# capture packets to and from a subnet of IP addresses in CIDR notation
 net 192.168.1.1/24 
 
-#Capture packets to and from a range of IPs in subnet format
+# capture packets to and from a subnet of IP addresses in network mask notation
 net 192.168.1.1 mask 255.255.255.0
 
-#Traffic from one source only capture
+# capture traffic only from one source
 src net 192.168.1.1
 
-#Traffic from a range of hosts only capture CIDR format
+# capture traffic only from a subnet of hosts in CIDR notation
 src net 192.168.1.1/24
 
-#Capture packets from a range of IPs in subnet format
+# capture packets from a range of IPs in subnet format
 net 192.168.1.1 mask 255.255.255.0
 
-#Capture specific ports (DNS example)
-port 53
+# capture traffic on specific ports
+port 21
 
-#Capture service
+# capture traffic for specific services
 http
 dns
 ftp
-ssh
 
-#Capture port range with specific protocol (all ports)
+# capture port range with specific protocol
 tcp portrange 1-65535
 
-#Capture only IPv4 traffic
-#This can be useful when trying to observe traffic other than ARP and STP
+# capture only IPv4 traffic
+# useful when trying to observe traffic other than ARP and STP
 ip
 
-#Capture only unicast traffic
-#Good for when you are trying to clear up noise on network
+# capture only unicast traffic
+# good for when you are trying to clear up noise on network
 not broadcast and not multicast
 
-#Capture Heartbleed attempts
+# capture heartbleed attempts
 tcp src port 443 and (tcp[((tcp[12] & 0xF0) >> 4 ) * 4] = 0x18) and (tcp[((tcp[12] & 0xF0) >> 4 ) * 4 + 1] = 0x03) and (tcp[((tcp[12] & 0xF0) >> 4 ) * 4 + 2] < 0x04) and ((ip[2:2] - 4 * (ip[0] & 0x0F)  - 4 * ((tcp[12] & 0xF0) >> 4) > 69)rc port 443 and (tcp[((tcp[12] & 0xF0) >> 4 ) * 4] = 0x18) and (tcp[((tcp[12] & 0xF0) >> 4 ) * 4 + 1] = 0x03) and (tcp[((tcp[12] & 0xF0) >> 4 ) * 4 + 2] < 0x04) and ((ip[2:2] - 4 * (ip[0] & 0x0F)  - 4 * ((tcp[12] & 0xF0) >> 4) > 69))
 ```
