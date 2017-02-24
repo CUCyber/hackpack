@@ -1,6 +1,6 @@
 ## SECCDC Competition Starting Checklist
 
-Below are competition specific go plans for various hosts in the SECCDC Pre-Qualifier.
+Below are competition specific go plans for various hosts in the SECCDC Qualifier.
 
 
 ### DNS
@@ -243,3 +243,8 @@ Do not forget to go through the standard Linux checklist!
 /etc/init.d/dovecot restart
 /etc/init.d/postfix restart
 ```
+
+
+### Firewall
+
+The firewall should be configured to only allow outgoing connections to 85.236.43.108 (CentOS mirror) and 130.89.148.13 (Debian archive).
