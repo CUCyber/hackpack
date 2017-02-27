@@ -24,18 +24,20 @@ Below is a set of example configuration files for securely configuring BIND as a
 
 ```bindconf
 options {
-   # disable zone transfers
+   # disable zone transfers, queries, and insecure options
    allow-transfer { "none"; };
    version "none";
    fetch-glue no;
 
-   # if we have another DNS recursor, disable queries and recursion
-   allow-query { "none"; };
+   # if we have another DNS recursor, disable recursion
    recursion no;
+   allow-query { "none"; };
 
    # if we are a DNS recursor, only allow queries
-   # from the local network
+   # from the local network or only  for specific hosts
+   #recursion yes;
    #allow-query { 10.0.0.0/24; localhost; };
+   #allow-query { "none"; };
 };
 
 # if we are a DNS recursor,

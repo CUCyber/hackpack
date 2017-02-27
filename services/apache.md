@@ -47,6 +47,22 @@ There is a large variety of steps that are important for securing Apache.
 * Allow only root to read the apache config or logs '/usr/lib/apache/{conf,logs}'
 * Move apache to a chroot if possible - see below
 * Use Mod\_Log\_Forensic
+* Remove compromising or information leaking modules
+    - mod\_status
+    - mod\_info
+    - mod\_autoindex
+    - mod\_cgi
+
+
+### Remove Override Functionality
+
+Web application override functionality should be disabled as they are a major security flaw in the Apache system. The functionality is easy to disable, `AllowOverride None` everywhere it is referenced, but the '.htaccess' files should be merged into a global configuration file. This can be done using the following snippet.
+
+```apache
+<Location "[absolute directory of .htaccess file]">
+	[contents of .htaccess file]
+</Location>
+```
 
 
 ### Chrooting
@@ -76,4 +92,17 @@ Listen 443
     SSLCertificateFile "/path/to/www.example.com.cert"
     SSLCertificateKeyFile "/path/to/www.example.com.key"
 </VirtualHost>
+```
+
+
+### Prevent Leaking Web Application Data
+
+The following files should be edited to prevent common ways web applications leak data.
+
+
+#### robots.txt
+
+```txt
+User-agent: *
+Disallow: /
 ```
