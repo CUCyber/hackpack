@@ -19,7 +19,7 @@ For each system:
 	- `crontab -e`
 	- not much should be there
 * Check for files with wide permissions and setuid
-	- sticky bit: `find <dir> -perm -u=s`
+	- setuid bit: `find <dir> -perm -u=s`
 	- world writable: `find <dir> -perm -o=w`
 * Create a report of running processes
 	- `ps aux`
