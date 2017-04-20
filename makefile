@@ -25,9 +25,9 @@ $(OUTFILE): $(SOURCES)
 	pandoc --template="$(TEMPLATE)" --highlight-style="${HIGHLIGHT_STYLE}" --standalone --toc --output "$(OUTFILE)" $(SOURCES)
 
 $(WEBSITE)/$(OUTFILE): $(OUTFILE)
-	cp $(OUTFILE) $(WEBSITE)/
+	cp $(OUTFILE) $(WEBSITE)/documents/
 
-	git -C "$(WEBSITE)" add "$(OUTFILE)"
+	git -C "$(WEBSITE)" add documents/"$(OUTFILE)"
 	git -C "$(WEBSITE)" commit -m "update hackpack"
 	git -C "$(WEBSITE)" push
 
