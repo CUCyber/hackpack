@@ -1,7 +1,7 @@
 CU Cyber Hackpack
 =================
 
-In this repository are the markdown sources to the hackpack used by CU Cyber in general and at competitions. An up-to-date build of the hackpack is available at [https://cucyber.net/hackpack.pdf](https://cucyber.net/hackpack.pdf).
+In this repository are the markdown sources to the hackpack used by CU Cyber in general and at competitions. An up-to-date build of the hackpack is available at [https://cucyber.net/documents/hackpack.pdf](https://cucyber.net/documents/hackpack.pdf).
 
 
 ## Dependencies
