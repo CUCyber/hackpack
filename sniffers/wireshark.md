@@ -13,7 +13,7 @@ In the traffic pane, the traffic will be highlighted to correspond with differen
 * Black - TCP packets with problems
 
 
-### Filters
+### Capture Filters
 
 ```wireshark
 # bidirection capture
