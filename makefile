@@ -1,8 +1,9 @@
 SHELL=/bin/bash
 
-OUTFILE=hackpack.pdf
+OUTFILE=hackpack.html
 
-TEMPLATE=./cyber.latex
+FILTER=./html.py
+TEMPLATE=./cyber.html
 HIGHLIGHT_STYLE=tango
 
 FIND=./find.py
@@ -22,7 +23,7 @@ clean:
 	rm -f "$(OUTFILE)"
 
 $(OUTFILE): $(SOURCES)
-	pandoc --template="$(TEMPLATE)" --highlight-style="${HIGHLIGHT_STYLE}" --standalone --toc --output "$(OUTFILE)" $(SOURCES)
+	pandoc --filter="$(FILTER)" --template="$(TEMPLATE)" --highlight-style="${HIGHLIGHT_STYLE}" --standalone --toc --output "$(OUTFILE)" $(SOURCES)
 
 $(WEBSITE)/$(OUTFILE): $(OUTFILE)
 	cp $(OUTFILE) $(WEBSITE)/documents/
