@@ -6,7 +6,7 @@
 rnapshot is a utility to create incremental snapshot backups using rsync. It has minimal dependencies and should work even on very old Linux distributions.
 
 
-### Dependencies
+#### Dependencies
 
 * perl
 * rsync
