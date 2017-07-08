@@ -33,5 +33,5 @@ def jump_to_top(doc, fmt):
     return doc
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     json.dump(jump_to_top(json.load(sys.stdin), sys.argv[1] if len(sys.argv) > 1 else ''), sys.stdout)
