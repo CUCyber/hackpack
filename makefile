@@ -23,7 +23,7 @@ all: $(OUTFILE)
 open: $(OUTFILE)
 	xdg-open "$(OUTFILE)" &>/dev/null & disown
 
-update: $(WEBSITE)/$(DIRECTORY)$(OUTFILE)
+update: $(WEBSITE)/$(DIRECTORY)$(OUTFILE) $(WEBSITE)/$(DIRECTORY)$(OUTFILE_HTML)
 
 clean:
 	rm -f "$(OUTFILE)"
