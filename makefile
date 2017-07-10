@@ -26,7 +26,7 @@ open: $(OUTFILE)
 update: $(WEBSITE)/$(DIRECTORY)$(OUTFILE) $(WEBSITE)/$(DIRECTORY)$(OUTFILE_HTML)
 
 clean:
-	rm -f "$(OUTFILE)"
+	rm -f "$(OUTFILE)" "$(OUTFILE_HTML)"
 
 $(OUTFILE): $(SOURCES)
 	pandoc --template="$(TEMPLATE)" --highlight-style="${HIGHLIGHT_STYLE}" --standalone --toc --output "$(OUTFILE)" $(SOURCES)
