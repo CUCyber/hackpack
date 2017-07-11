@@ -24,6 +24,9 @@ open: $(OUTFILE)
 	xdg-open "$(OUTFILE)" &>/dev/null & disown
 
 update: $(WEBSITE)/$(DIRECTORY)$(OUTFILE) $(WEBSITE)/$(DIRECTORY)$(OUTFILE_HTML)
+	git -C "$(WEBSITE)" add "$(DIRECTORY)$(OUTFILE)" "$(DIRECTORY)$(OUTFILE_HTML)"
+	git -C "$(WEBSITE)" commit -m "update hackpack"
+	git -C "$(WEBSITE)" push
 
 clean:
 	rm -f "$(OUTFILE)" "$(OUTFILE_HTML)"
@@ -34,11 +37,10 @@ $(OUTFILE): $(SOURCES)
 $(OUTFILE_HTML): $(SOURCES)
 	pandoc --filter="$(FILTER_HTML)" --template="$(TEMPLATE_HTML)" --highlight-style="${HIGHLIGHT_STYLE}" --standalone --toc --output "$(OUTFILE_HTML)" $(SOURCES)
 
-$(WEBSITE)/$(DIRECTORY)$(OUTFILE): $(OUTFILE) $(OUTFILE_HTML)
-	cp "$(OUTFILE)" "$(OUTFILE_HTML)" "$(WEBSITE)/$(DIRECTORY)"
+$(WEBSITE)/$(DIRECTORY)$(OUTFILE): $(OUTFILE)
+	cp "$(OUTFILE)" "$(WEBSITE)/$(DIRECTORY)"
 
-	git -C "$(WEBSITE)" add "$(DIRECTORY)$(OUTFILE)" "$(DIRECTORY)$(OUTFILE_HTML)"
-	git -C "$(WEBSITE)" commit -m "update hackpack"
-	git -C "$(WEBSITE)" push
+$(WEBSITE)/$(DIRECTORY)$(OUTFILE_HTML): $(OUTFILE_HTML)
+	cp "$(OUTFILE_HTML)" "$(WEBSITE)/$(DIRECTORY)"
 
 .PHONY: all open update clean
