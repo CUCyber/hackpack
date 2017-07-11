@@ -56,9 +56,26 @@
 
         <!-- Pandoc Styling
         ================================================== -->
-        <style type="text/css">code{ white-space: pre-wrap; word-wrap: break-word; }</style>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+                word-wrap: break-word;
+            }
+
+            *[id]:before {
+                display: block;
+                content: " ";
+                margin-top: -141px;
+                height: 141px;
+                visibility: hidden;
+            }
+        </style>
         $if(quotes)$
-        <style type="text/css">q { quotes: "“" "”" "‘" "’"; }</style>
+        <style type="text/css">
+            q {
+                quotes: "“" "”" "‘" "’";
+            }
+        </style>
         $endif$
         $if(highlighting-css)$
         <style type="text/css">
