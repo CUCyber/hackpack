@@ -62,28 +62,12 @@
                 word-wrap: break-word;
             }
 
-            #TOC:before {
-                display: block;
-                content: " ";
-                margin-top: -100px;
-                height: 100px;
-                visibility: hidden;
-            }
-
             @media (min-width: 768px) {
                 *[id]:before {
                     display: block;
                     content: " ";
                     margin-top: -141px;
                     height: 141px;
-                    visibility: hidden;
-                }
-
-                #TOC:before {
-                    display: block;
-                    content: " ";
-                    margin-top: -221px;
-                    height: 221px;
                     visibility: hidden;
                 }
             }
@@ -97,7 +81,7 @@
         $endif$
         $if(highlighting-css)$
         <style type="text/css">
-$highlighting-css$
+            $highlighting-css$
         </style>
         $endif$
         $for(css)$
@@ -201,34 +185,36 @@ $highlighting-css$
         <section class="single-post">
             <div class="container">
                 <div class="row">
-                    <p>You can download a PDF of this hackpack <a href="/documents/hackpack.pdf">here</a> and find the Markdown sources of this hackpack on <a href="https://github.com/CUCyber/Hackpack">GitHub</a>.</p>
-
-                    $for(include-before)$
-                    $include-before$
-                    $endfor$
-                    $if(title)$
-                    <header>
-                        <h1 class="title">$title$</h1>
-                        $if(subtitle)$
-                        <p class="subtitle">$subtitle$</p>
-                        $endif$
-                        $for(author)$
-                        <p class="author">$author$</p>
+                    <div class="col-md-12">
+                        $for(include-before)$
+                        $include-before$
                         $endfor$
-                        $if(date)$
-                        <p class="date">$date$</p>
+                        $if(title)$
+                        <header>
+                            <h1>$title$</h1>
+                            $if(subtitle)$
+                            <p class="subtitle">$subtitle$</p>
+                            $endif$
+                            $if(date)$
+                            <p class="date">$date$</p>
+                            $endif$
+                        </header>
                         $endif$
-                    </header>
-                    $endif$
-                    $if(toc)$
-                    <nav id="$idprefix$TOC">
-                        $toc$
-                    </nav>
-                    $endif$
-                    $body$
-                    $for(include-after)$
-                    $include-after$
-                    $endfor$
+
+                        <p>You can download a PDF of this hackpack <a href="/documents/hackpack.pdf">here</a> and find the Markdown sources of this hackpack on <a href="https://github.com/CUCyber/Hackpack">GitHub</a>.</p>
+
+                        $if(toc)$
+                        <h1 id="top">Table of Contents</h1>
+
+                        <nav id="$idprefix$TOC">
+                            $toc$
+                        </nav>
+                        $endif$
+                        $body$
+                        $for(include-after)$
+                        $include-after$
+                        $endfor$
+                    </div>
                 </div>
             </div>
         </section>

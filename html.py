@@ -7,8 +7,8 @@ from pandocfilters import walk, Header, Link, Para, Str
 
 # record how many headers deep we are
 depth = 0
-# create node that is a block paragraph with a link that says 'Jump to Top' and hrefs '#TOC'
-jump = Para([Link(['', [], []], [Str('Jump to Top')], ('#TOC', 'top'))])
+# create node that is a block paragraph with a link that says 'Jump to Top' and hrefs '#top'
+jump = Para([Link(['', [], []], [Str('Jump to Top')], ('#top', 'top'))])
 
 
 # add jumps before headers of the document
