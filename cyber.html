@@ -62,12 +62,14 @@
                 word-wrap: break-word;
             }
 
-            *[id]:before {
-                display: block;
-                content: " ";
-                margin-top: -141px;
-                height: 141px;
-                visibility: hidden;
+            @media (min-width: 767px) {
+                *[id]:before {
+                    display: block;
+                    content: " ";
+                    margin-top: -141px;
+                    height: 141px;
+                    visibility: hidden;
+                }
             }
         </style>
         $if(quotes)$
