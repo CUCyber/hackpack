@@ -102,6 +102,20 @@
             if (window.location.hostname != 'localhost' && window.location.hostname != '127.0.0.1' && window.location.protocol != 'https:')
                 window.location.protocol = 'https';
         </script>
+        
+        <!-- JavaScript to handle changing the button text of the show/hide TOC button. -->
+        <script type="text/javascript">
+            $$(document).ready(function(){
+                $$("#TOC-toggle").click(function() {
+                    if($$(this).text() == "Show"){
+                        $$(this).text("Hide");
+                    }
+                    else {
+                        $$(this).text("Show");
+                    }
+                });
+            });
+        </script>
     </head>
     <body>
         <!--
@@ -204,9 +218,9 @@
                         <p>You can download a PDF of this hackpack <a href="/documents/hackpack.pdf">here</a> and find the Markdown sources of this hackpack on <a href="https://github.com/CUCyber/Hackpack">GitHub</a>.</p>
 
                         $if(toc)$
-                        <h1 id="top">Table of Contents</h1>
+                        <h1 id="top">Table of Contents <button data-toggle="collapse" data-target="#TOC" class="btn" id="TOC-toggle">Show</button></h1>
 
-                        <nav id="$idprefix$TOC">
+                        <nav id="$idprefix$TOC" class="collapse">
                             $toc$
                         </nav>
                         $endif$
