@@ -6,16 +6,18 @@ In this repository are the markdown sources to the hackpack used by CU Cyber in 
 
 ## Dependencies
 
+* make
 * git
 * python3
 * pandoc
+* pandocfilters
 * texlive-latexextra
 
 
 ### Debian/Ubuntu/Kali
 
 ```sh
-$ sudo apt install git python3 pandoc texlive-latex-extra
+$ sudo apt install make git python3 pandoc python3-pandocfilters texlive-latex-extra
 ```
 
 
@@ -23,28 +25,41 @@ $ sudo apt install git python3 pandoc texlive-latex-extra
 
 ```sh
 $ sudo yum install epel-release
-$ sudo yum install git python34 pandoc texlive-collection-latexextra
+$ sudo yum install make git python34 pandoc texlive-collection-latexextra
+$ sudo pip3 install pandocfilters
 ```
 
 
 ### Fedora
 
 ```sh
-$ sudo dnf install git pandoc texlive-collection-latexextra
+$ sudo dnf install make git pandoc python3-pandocfilters texlive-collection-latexextra
 ```
 
 
 ### Arch
 
 ```sh
-$ sudo pacman -S git pandoc texlive-latexextra
+$ sudo pacman -S make git pandoc python-pandocfilters texlive-latexextra
 ```
 
 
 ### Gentoo
 
 ```sh
-$ sudo emerge git python:3.4 pandoc texlive-latexextra
+$ sudo emerge dev-vcs/git dev-lang/python:3.4 app-text/pandoc dev-texlive/texlive-latexextra
+$ sudo pip3 install pandocfilters
+```
+
+
+### macOS
+
+Requires [Homebrew](https://brew.sh/) and [Homebrew Cask](https://caskroom.github.io/). Use `gmake` instead of `make`.
+
+```sh
+$ brew install make git python3 pandoc
+$ brew cask mactex
+$ pip3 install pandocfilters
 ```
 
 
