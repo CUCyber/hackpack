@@ -2,7 +2,7 @@
 
 This checklist is designed for the first 30 minutes of competition.
 
-For each system:
+For Each system:
 
 * Change the password for the admin accounts
 * Remove any nonessential user accounts
