@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import codecs
+import io
 import json
 import sys
 
@@ -51,4 +51,4 @@ def jump_to_top(doc, fmt):
 
 if __name__ == '__main__':
     # read JSON in, parse it with an optional format argument, and write JSON out
-    json.dump(jump_to_top(json.load(codecs.decode(sys.stdin)), sys.argv[1] if len(sys.argv) > 1 else ''), codecs.encode(sys.stdout))
+    json.dump(jump_to_top(json.load(io.TextIOWrapper(sys.stdin.buffer, encoding='utf-8')), sys.argv[1] if len(sys.argv) > 1 else ''), io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8'))
