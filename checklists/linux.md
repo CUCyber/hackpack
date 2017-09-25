@@ -66,7 +66,7 @@ For all systems:
 * Bind mount '/var/tmp' to '/tmp'
 * Require a password for root
 * Set hard core limit to `0` in '/etc/security/limits.conf'
-* Disable Rarely Used Filesystems and Protocols
+* Disable rarely used filesystems and protocols
 
 
 #### Modprobe
