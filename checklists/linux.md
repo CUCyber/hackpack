@@ -76,7 +76,7 @@ For all systems:
 
 ```conf
 install cramfs /bin/true
-install freevxfs  /bin/true
+install freevxfs /bin/true
 install jffs2 /bin/true
 install hfs /bin/true
 install hfsplus /bin/true
