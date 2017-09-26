@@ -92,10 +92,10 @@ install tipc /bin/true
 #### Sysctl
 
 * Enable ASLR `/sbin/sysctl kernel.randomize_va_space = 2`
-* Disable network forwarding `/sbin/sysctl -w net.ipv4.ip_forward  0`
-* Disable packet redirects `/sbin/sysctl -w net.conf.default.send_redirects  0`
-* Flush packet redirects `/sbin/sysctl -w net.ipv4.conf.all.send_redirects  0`
-* Flush packet redirects `/sbin/sysctl -w net.ipv4.conf.all.send_redirects  0`
+* Disable network forwarding `/sbin/sysctl -w net.ipv4.ip_forward 0`
+* Disable packet redirects `/sbin/sysctl -w net.conf.default.send_redirects 0`
+* Flush packet redirects `/sbin/sysctl -w net.ipv4.conf.all.send_redirects 0`
+* Flush packet redirects `/sbin/sysctl -w net.ipv4.conf.all.send_redirects 0`
 * Disable source routed packets `/sbin/sysctl -w net.ipv4.conf.all.accept_source_route 0`
 * Disable source routed packets `/sbin/sysctl -w net.ipv4.conf.default.accept_source_route 0`
 * Disable ICMP redirect acceptance `/sbin/sysctl -w net.ipv4.conf.all.accept_redirects 0`
@@ -109,7 +109,7 @@ install tipc /bin/true
 * Use tcp syncookies `/sbin/sysctl -w net.ipv4.tcp_syncookies 1`
 * Log suspicious packets `/sbin/sysctl -w net.ipv4.conf.all.log_martians 1`
 * Log suspicious packets `/sbin/sysctl -w net.ipv4.conf.default.log_martians 1`
-* Flush routing tables `/sbin/sysctl -w net.ipv4.route.flush  1`
+* Flush routing tables `/sbin/sysctl -w net.ipv4.route.flush 1`
 * Disable IPv6 router advertisements `/sbin/sysctl -w net.ipv6.conf.all.accept_ra 0`
 * Disable IPv6 router advertisements `/sbin/sysctl -w net.ipv6.conf.default.accept_ra 0`
 * Disable IPv6 redirect acceptance `/sbin/sysctl -w net.ipv5.confi.all.accept_redirects 0`
