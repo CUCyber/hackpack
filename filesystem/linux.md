@@ -27,7 +27,7 @@
 		+ `www` - web server files
 		+ `tmp` - temporary files that need to survive reboot
 * `/tmp`
-	- Temporary file that do not need to survive reboots
+	- Temporary files that do not need to survive reboots
 	- Sockets are often found here
 		+ `.X11-unix` and `.ICE-unix` - places for X11 sockets and sessions (not found and should be deleted on a headless server!)
 * `/home`
