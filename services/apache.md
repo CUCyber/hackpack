@@ -48,10 +48,10 @@ There is a large variety of steps that are important for securing Apache.
 * Move apache to a chroot if possible - see below
 * Use Mod\_Log\_Forensic
 * Remove compromising or information leaking modules
-    - mod\_status
-    - mod\_info
-    - mod\_autoindex
-    - mod\_cgi
+	- mod\_status
+	- mod\_info
+	- mod\_autoindex
+	- mod\_cgi
 
 
 ### Remove Override Functionality
