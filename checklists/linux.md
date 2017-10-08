@@ -7,7 +7,7 @@ For each system:
 * Check for users
 	- `cat /etc/passwd`
 * Change the password for the root account
-	- `which passwd`
+	- `type passwd`
 	- `cat <path to passwd>`
 	- `passwd <user>`
 * Check for improper ssh config
