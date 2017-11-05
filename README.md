@@ -58,7 +58,7 @@ Requires [Homebrew](https://brew.sh/) and [Homebrew Cask](https://caskroom.githu
 
 ```sh
 $ brew install make git python3 pandoc
-$ brew cask mactex
+$ brew cask install mactex
 $ pip3 install pandocfilters
 ```
 
