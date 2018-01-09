@@ -217,11 +217,13 @@
                         <p>You can download a PDF of this hackpack <a href="/documents/hackpack.pdf">here</a> and find the Markdown sources of this hackpack on <a href="https://github.com/CUCyber/Hackpack">GitHub</a>.</p>
 
                         $if(toc)$
-                        <h1 id="top">Table of Contents <button data-toggle="collapse" data-target="#TOC" class="btn">Show</button></h1>
+                        <div class="table-of-contents">
+                            <h1 id="top">Table of Contents <button data-toggle="collapse" data-target="#TOC" class="btn">Show</button></h1>
 
-                        <nav id="TOC" class="collapse">
-                            $toc$
-                        </nav>
+                            <nav id="TOC" class="collapse">
+                                $toc$
+                            </nav>
+                        </div>
                         $endif$
                         $body$
                         $for(include-after)$
