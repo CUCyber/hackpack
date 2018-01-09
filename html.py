@@ -38,7 +38,7 @@ def add_to_headers(key, val, fmt, meta):
 # add jumps in all necessary places in the document
 def jump_to_top(doc, fmt):
     # add jumps throughout the document
-    doc = walk(doc, add_to_headers, fmt, doc['meta'] if 'meta' in doc else {})
+    doc = walk(doc, add_to_headers, fmt, doc['meta'] if 'meta' in doc else doc[0]['unMeta'])
 
     # add a jump at the bottom of the document
     try:
