@@ -12,13 +12,13 @@ In this repository are the markdown sources to the hackpack used by CU Cyber in 
 * pandoc
 * pandocfilters
 * texlive-latexextra
-* python-watchdog (optional; for automatic rebuilding on presentation change)
+* python3-watchdog (optional; for automatic rebuilding on presentation change)
 
 
 ### Debian/Ubuntu/Kali
 
 ```sh
-$ sudo apt install make git python3 pandoc python-watchdog python3-pandocfilters texlive-latex-extra
+$ sudo apt install make git python3 pandoc python3-pandocfilters texlive-latex-extra python3-watchdog
 ```
 
 
@@ -28,27 +28,28 @@ $ sudo apt install make git python3 pandoc python-watchdog python3-pandocfilters
 $ sudo yum install epel-release
 $ sudo yum install make git python34 pandoc texlive-collection-latexextra
 $ sudo pip3 install pandocfilters
+$ sudo pip3 install watchdog
 ```
 
 
 ### Fedora
 
 ```sh
-$ sudo dnf install make git pandoc python3-watchdog python3-pandocfilters texlive-collection-latexextra
+$ sudo dnf install make git pandoc python3-pandocfilters texlive-collection-latexextra python3-watchdog
 ```
 
 
 ### Arch
 
 ```sh
-$ sudo pacman -S make git pandoc python-watchdog python-pandocfilters texlive-latexextra
+$ sudo pacman -S make git pandoc python-pandocfilters texlive-latexextra python-watchdog
 ```
 
 
 ### Gentoo
 
 ```sh
-$ sudo emerge dev-vcs/git dev-lang/python:3.4 app-text/pandoc dev-python/watchdog dev-texlive/texlive-latexextra
+$ sudo emerge dev-vcs/git dev-lang/python:3.4 app-text/pandoc dev-texlive/texlive-latexextra dev-python/watchdog
 $ sudo pip3 install pandocfilters
 ```
 
@@ -60,8 +61,8 @@ Requires [Homebrew](https://brew.sh/) and [Homebrew Cask](https://caskroom.githu
 ```sh
 $ brew install make git python2 python3 pandoc
 $ brew cask install mactex
-$ pip2 install watchdog
 $ pip3 install pandocfilters
+$ pip3 install watchdog
 ```
 
 
