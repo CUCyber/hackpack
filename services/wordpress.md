@@ -2,6 +2,8 @@
 
 Wordpress is a PHP content management system. It has reasonable security in a new default install, but has a poor track record for remote execution exploits. The best way to secure Wordpress is to update it if possible and remove all unnecessary or old plugins.
 
+See the [PHP](#php) section for more details of general PHP hardening.
+
 
 ### Setup
 

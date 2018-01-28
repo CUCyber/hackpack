@@ -1,6 +1,7 @@
 SHELL=/bin/bash
 
 OUTFILE=hackpack.pdf
+ROOT=/documents/
 
 TEMPLATE=./cyber.latex
 
@@ -14,7 +15,7 @@ HIGHLIGHT_STYLE=tango
 FIND=./find.py
 
 WEBSITE=../website
-DIRECTORY=documents/
+SERVE=./serve.py
 
 SOURCES!="$(FIND)" -e 'LICENSE.md' -e 'README.md' -f general -f checklists -l appendix -g index.md .
 
@@ -23,8 +24,13 @@ all: $(OUTFILE)
 open: $(OUTFILE)
 	xdg-open "$(OUTFILE)" &>/dev/null & disown
 
-update: $(WEBSITE)/$(DIRECTORY)$(OUTFILE) $(WEBSITE)/$(DIRECTORY)$(OUTFILE_HTML)
-	git -C "$(WEBSITE)" add "$(DIRECTORY)$(OUTFILE)" "$(DIRECTORY)$(OUTFILE_HTML)"
+website: $(WEBSITE)$(ROOT)$(OUTFILE_HTML)
+
+serve: $(WEBSITE)$(ROOT)$(OUTFILE_HTML)
+	$(SERVE) $(WEBSITE)
+
+update: $(WEBSITE)$(ROOT)$(OUTFILE) $(WEBSITE)$(ROOT)$(OUTFILE_HTML)
+	git -C "$(WEBSITE)" add ".$(ROOT)$(OUTFILE)" ".$(ROOT)$(OUTFILE_HTML)"
 	git -C "$(WEBSITE)" commit -m "update hackpack"
 	git -C "$(WEBSITE)" push
 
@@ -37,10 +43,10 @@ $(OUTFILE): $(SOURCES)
 $(OUTFILE_HTML): $(SOURCES)
 	pandoc --filter="$(FILTER_HTML)" --template="$(TEMPLATE_HTML)" --highlight-style="${HIGHLIGHT_STYLE}" --standalone --toc --output "$(OUTFILE_HTML)" $(SOURCES)
 
-$(WEBSITE)/$(DIRECTORY)$(OUTFILE): $(OUTFILE)
-	cp "$(OUTFILE)" "$(WEBSITE)/$(DIRECTORY)"
+$(WEBSITE)$(ROOT)$(OUTFILE): $(OUTFILE)
+	cp "$(OUTFILE)" "$(WEBSITE)$(ROOT)"
 
-$(WEBSITE)/$(DIRECTORY)$(OUTFILE_HTML): $(OUTFILE_HTML)
-	cp "$(OUTFILE_HTML)" "$(WEBSITE)/$(DIRECTORY)"
+$(WEBSITE)$(ROOT)$(OUTFILE_HTML): $(OUTFILE_HTML)
+	cp "$(OUTFILE_HTML)" "$(WEBSITE)$(ROOT)"
 
 .PHONY: all open update clean

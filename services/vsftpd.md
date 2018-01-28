@@ -8,3 +8,4 @@ When an FTP server needs to be created or migrating to a more secure box, the FT
 ```conf
 nopriv_user=ftp
 ftpd-banner=Windows FTP Server
+```
