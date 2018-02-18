@@ -5,11 +5,22 @@ The Palo Alto firewall is a common and relatively user friendly hardware firewal
 
 ### Lights Out
 
-To disconnect a port, likely for the purposes of isolating the network from attack, use the following snippet with the desired interface to disconnect.
+To disconnect a port, likely for the purposes of isolating the network from attack, use the following snippet with the desired interface (generally wan) to disconnect.
 
 ```paloalto
 configure
 set network interface ethernet <interface> link-state down
+commit
+```
+
+
+### Change Default Password
+
+To change the admin password, use the following snippet.
+
+```paloalto
+configure
+set mgt-config users admin password
 commit
 ```
 
@@ -79,7 +90,7 @@ The following rule prevents any connections to the firewall itself.
 
 ```paloalto
 edit rulebase security
-set rules banhammer from any to any destination <management address> action deny
+set rules banhammer from any to any source any destination <management address> application any service any action deny
 up
 ```
 
@@ -97,11 +108,11 @@ up
 
 #### Incoming Traffic
 
-The following rule enables a connection between the public interface and LAN under specific circumstances, here an HTTP connection to webapps.
+The following rule enables a connection between the public interface and LAN under specific circumstances, here an HTTP connection to webapps. Replace `application-default` with a port number if different from default.
 
 ```paloalto
 edit rulebase security
-set rules package from public to lan destination <webapps> application web-browsing service application-default allow
+set rules package from public to lan destination <webapps> application web-browsing service application-default action allow
 up
 ```
 
@@ -112,7 +123,7 @@ The following rule enables outgoing communication to specific websites for packa
 
 ```paloalto
 edit rulebase security
-set rules package from any to public destination [ <centos archive> <debian archive> ] application web-browsing
-set dns from any to public destination <dns server> application dns
+set rules package from any to public source any destination [ <centos archive> <debian archive> ] application web-browsing service application-default action allow
+set dns from any to public source any destination <dns server> application dns service application-default action allow
 up
 ```
