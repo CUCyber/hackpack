@@ -78,8 +78,8 @@ To edit security rules, such as traffic barriers between interfaces, enter the `
 The following rule prevents any connections to the firewall itself.
 
 ```paloalto
-edit rulebase security banhammer
-set from any to any destination <management address> action deny
+edit rulebase security
+set rules banhammer from any to any destination <management address> action deny
 up
 ```
 
@@ -89,8 +89,8 @@ up
 The following rule enables a connection between the DMZ and LAN under specific circumstances, here a MySQL connection from webapps to database.
 
 ```paloalto
-edit rulebase security database
-set from dmz to lan source <webapps> destination <database> application mysql service application-default action allow
+edit rulebase security
+set rules database from dmz to lan source <webapps> destination <database> application mysql service application-default action allow
 up
 ```
 
@@ -100,8 +100,8 @@ up
 The following rule enables a connection between the public interface and LAN under specific circumstances, here an HTTP connection to webapps.
 
 ```paloalto
-edit rulebase security package
-set from public to lan destination <webapps> application web-browsing service application-default allow
+edit rulebase security
+set rules package from public to lan destination <webapps> application web-browsing service application-default allow
 up
 ```
 
@@ -111,10 +111,8 @@ up
 The following rule enables outgoing communication to specific websites for package management and for DNS lookups.
 
 ```paloalto
-edit rulebase security package
-set from any to public destination [ <centos archive> <debian archive> ] application web-browsing
-up
-edit rulebase security dns
-set from any to public destination <dns server> application dns
+edit rulebase security
+set rules package from any to public destination [ <centos archive> <debian archive> ] application web-browsing
+set dns from any to public destination <dns server> application dns
 up
 ```
