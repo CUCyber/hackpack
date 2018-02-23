@@ -35,7 +35,7 @@ The Palo Alto firewall works similar to Cisco systems in that the command line h
 To edit network interfaces, such as the IP and mask of a particular subnet, enter the `edit network interface` context.
 
 
-#### Set Interfae Network
+#### Set Interface Network
 
 Use the following to set the interface to the `10.13.37.0/24` network with the address `10.13.37.3`.
 
