@@ -1,6 +1,14 @@
 ## Linux
 
-Here are some of the worst things that they can do, and how to hopefully recover.
+Here are some of the worst things that the red team can do and how to hopefully recover.
+
+
+### Empty Running Executable
+
+If your interpreter or other running executable is an empty file, you can grab the binary from memory.
+
+1. Find a PID of the process (e.g. `bash`) - `pgrep <process name>`
+2. Copy the EXE to the location (e.g. `/bin/bash`) - `cp -f /proc/<pid>/exe <location>`
 
 
 ### Invalid Password
