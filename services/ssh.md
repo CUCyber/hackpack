@@ -1,6 +1,6 @@
 ## OpenSSH
 
-SSH or Secure Shell is a remote administration protocol. It allows the user to send remote commands to Linux machines (and soon to versions of Windows 10 or later). It can be a vary powerful tool for system administration, but can also be a powerful exploit target if not secured. It is used with a variety of tools, including the provisioning tool Ansible and back up tool rsnapshot for secure connections. In general there are a few best practices to follow for using ssh.
+SSH or Secure Shell is a remote administration protocol. It allows the user to send remote commands to Linux machines (and soon to versions of Windows 10 or later). It can be a vary powerful tool for system administration, but can also be a powerful exploit target if not secured. It is used with a variety of tools, including the backup tool rsnapshot for secure connections. In general there are a few best practices to follow for using ssh.
 
 
 ### Best Practices
