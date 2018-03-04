@@ -46,12 +46,22 @@ Important user level configuration directories and files:
 #### /etc/ssh/sshd\_config
 
 ```sshconf
+Protocol 2
 PermitRootLogin no
+PermitEmptyPasswords no
+IgnoreRhosts yes
+RhostsAuthentication no
+RhostsRSAAuthentication no
+HostbasedAuthentication no
 UsePAM yes
 UsePrivilegeSeparation sandbox
 AcceptEnv LANG LC_*
+LoginGraceTime 15s
+SyslogFacility AUTH
 ClientAliveInterval 300
 ClientAliveCountMax 0
+AllowUsers <user1> <user2> ...
+MaxAuthTries 1
 ```
 
 
