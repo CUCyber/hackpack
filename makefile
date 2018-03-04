@@ -24,7 +24,7 @@ all: $(OUTFILE)
 open: $(OUTFILE)
 	xdg-open "$(OUTFILE)" &>/dev/null & disown
 
-website: $(WEBSITE)$(ROOT)$(OUTFILE_HTML)
+website: $(WEBSITE)$(ROOT)$(OUTFILE) $(WEBSITE)$(ROOT)$(OUTFILE_HTML)
 
 serve: $(WEBSITE)$(ROOT)$(OUTFILE_HTML)
 	$(SERVE) $(WEBSITE)
