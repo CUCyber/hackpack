@@ -117,6 +117,7 @@ edit rulebase security
 set rules package from any to public source any
   destination [ <centos archive> <debian archive> ]
   application web-browsing service application-default action allow
-set dns from any to public source any destination <dns server> application dns service application-default action allow
+set dns from any to public source any destination <dns server>
+  application dns service application-default action allow
 up
 ```

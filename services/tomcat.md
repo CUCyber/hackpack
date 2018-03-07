@@ -40,10 +40,10 @@ Apache Tomcat is a web server designed to serve Java Server Page (JSP) web appli
 	- Ensure the following lines are in logging.properties `handlers=org.apache.juli.FileHandler, java.util.logging.ConsoleHandler`
 	- Ensure the following lines are in logging.properties `org.apache.juli.FileHandler.level=FINEST`
 	- Ensure that `className` is set to `org.apache.catalina.valves.FastCommonAccessLogValve` in `$CATALINA_BASE/<app name>/META-INF/context.xml`
-	- Ensure that directory is set to `$CATALINA_HOME/logs` |in `$CATALINA_BASE/<app name>/META-INF/context.xml`
+	- Ensure that directory is set to `$CATALINA_HOME/logs` in `$CATALINA_BASE/<app name>/META-INF/context.xml`
 	- Ensure that pattern is set to `"%t % U %a %A %m %p %q %s"` in `$CATALINA_BASE/<app name>/META-INF/context.xml`
 * Prevent unexpected code execution
-	- Set package.access = `sun.,org.apache.catalina.,org.apache.coyote.,org.apache.tomcat.,org.apache.jasper` in conf/catalina.properties
+	- Set `package.access` to `sun., org.apache.catalina., org.apache.coyote., org.apache.tomcat., org.apache.jasper.` in conf/catalina.properties
 	- Ensure that Tomcat is started with `-security`
 	- Ensure that `autoDeploy="false"` in server.xml
 	- Ensure that `deployOnStartup="false"` in server.xml
