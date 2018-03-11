@@ -69,15 +69,15 @@ MaxAuthTries 1
 
 ```sh
 for key_dir in $(awk 'BEGIN { FS=":"} {print $6}' /etc/passwd); do
-	if [ -d "$key_dir/.ssh" ]; then
-		test -f "$key_dir/.ssh/authorized_keys" && \
-			mv "$key_dir/.ssh/authorized_keys" "$key_dir/.ssh/authorized_keys~" &>/dev/null
-		test -f "$key_dir/.ssh/rhosts" && \
-			mv "$key_dir/.ssh/rhosts" "$key_dir/.ssh/rhosts~" &>/dev/null
-		test -f "$key_dir/.ssh/shosts" && \
-			mv "$key_dir/.ssh/shosts" "$key_dir/.ssh/shosts~" &>/dev/null
-		ls "$key_dir/.ssh/id*" &> /dev/null && echo "found keys at $key_dir/.ssh"
-	fi
+  if [ -d "$key_dir/.ssh" ]; then
+    test -f "$key_dir/.ssh/authorized_keys" && \
+      mv "$key_dir/.ssh/authorized_keys" "$key_dir/.ssh/authorized_keys~" &>/dev/null
+    test -f "$key_dir/.ssh/rhosts" && \
+      mv "$key_dir/.ssh/rhosts" "$key_dir/.ssh/rhosts~" &>/dev/null
+    test -f "$key_dir/.ssh/shosts" && \
+      mv "$key_dir/.ssh/shosts" "$key_dir/.ssh/shosts~" &>/dev/null
+    ls "$key_dir/.ssh/id*" &> /dev/null && echo "found keys at $key_dir/.ssh"
+  fi
 done
 ```
 

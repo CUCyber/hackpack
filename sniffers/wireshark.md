@@ -55,5 +55,13 @@ ip
 not broadcast and not multicast
 
 # capture heartbleed attempts
-tcp src port 443 and (tcp[((tcp[12] & 0xF0) >> 4 ) * 4] = 0x18) and (tcp[((tcp[12] & 0xF0) >> 4 ) * 4 + 1] = 0x03) and (tcp[((tcp[12] & 0xF0) >> 4 ) * 4 + 2] < 0x04) and ((ip[2:2] - 4 * (ip[0] & 0x0F) - 4 * ((tcp[12] & 0xF0) >> 4) > 69)rc port 443 and (tcp[((tcp[12] & 0xF0) >> 4 ) * 4] = 0x18) and (tcp[((tcp[12] & 0xF0) >> 4 ) * 4 + 1] = 0x03) and (tcp[((tcp[12] & 0xF0) >> 4 ) * 4 + 2] < 0x04) and ((ip[2:2] - 4 * (ip[0] & 0x0F) - 4 * ((tcp[12] & 0xF0) >> 4) > 69))
+tcp src port 443 and (tcp[((tcp[12] & 0xF0) >> 4 ) * 4] = 0x18)
+  and (tcp[((tcp[12] & 0xF0) >> 4 ) * 4 + 1] = 0x03)
+  and (tcp[((tcp[12] & 0xF0) >> 4 ) * 4 + 2] < 0x04)
+  and ((ip[2:2] - 4 * (ip[0] & 0x0F) - 4 * ((tcp[12] & 0xF0) >> 4) > 69)rc
+  port 443
+  and (tcp[((tcp[12] & 0xF0) >> 4 ) * 4] = 0x18)
+  and (tcp[((tcp[12] & 0xF0) >> 4 ) * 4 + 1] = 0x03)
+  and (tcp[((tcp[12] & 0xF0) >> 4 ) * 4 + 2] < 0x04)
+  and ((ip[2:2] - 4 * (ip[0] & 0x0F) - 4 * ((tcp[12] & 0xF0) >> 4) > 69))
 ```

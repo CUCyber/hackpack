@@ -90,7 +90,8 @@ The following rule enables a connection between the DMZ and LAN under specific c
 
 ```paloalto
 edit rulebase security
-set rules database from dmz to lan source <webapps> destination <database> application mysql service application-default action allow
+set rules database from dmz to lan source <webapps> destination <database>
+  application mysql service application-default action allow
 up
 ```
 
@@ -101,7 +102,8 @@ The following rule enables a connection between the public interface and LAN und
 
 ```paloalto
 edit rulebase security
-set rules webapps from public to lan source any destination <webapps> application web-browsing service application-default action allow
+set rules webapps from public to lan source any destination <webapps>
+  application web-browsing service application-default action allow
 up
 ```
 
@@ -112,7 +114,10 @@ The following rule enables outgoing communication to specific websites for packa
 
 ```paloalto
 edit rulebase security
-set rules package from any to public source any destination [ <centos archive> <debian archive> ] application web-browsing service application-default action allow
-set dns from any to public source any destination <dns server> application dns service application-default action allow
+set rules package from any to public source any
+  destination [ <centos archive> <debian archive> ]
+  application web-browsing service application-default action allow
+set dns from any to public source any destination <dns server>
+  application dns service application-default action allow
 up
 ```
