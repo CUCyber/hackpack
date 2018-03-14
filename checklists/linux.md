@@ -38,6 +38,10 @@ For each system:
 	- See 'Filesystem and Access Control Permissions' -> '/home' and '/var/www'
 * Check mounted filesystems
 	- `lsblk`
+* Prevent device files, setuid files, and executables in globally writable directories
+	- `mount -o remount,nodev,nosuid,noexec /tmp`
+	- `mount -o remount,nodev,nosuid,noexec /var/tmp`
+	- `mount -o remount,nodev,nosuid,noexec /dev/shm`
 * Install important system and security updates
 	- OpenSSL, OpenSSH, Apache, FTP, SMTP, DNS
 	- Linux kernel (not necessarily to latest major version but to latest security update) - requires reboot
