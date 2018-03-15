@@ -225,12 +225,116 @@ __Delete DNS Records:__
 
 _Note: Secondary or stubs of a zone cannot be hosted on the primary server for that zone_
 
+__Create Primary Zone__
+ - CMD: `dnscmd.exe /zoneadd <ZoneName> /dsprimary /dp <FQDN>`
+ - CMD: `dnscmd.exe /zoneadd <ZoneName> /primary /file <FileName> /dp <FQDN>` 
+
+ - PS : `Add-DnsServerPrimaryZone
+   [-ResponsiblePerson <String>]
+   [-DynamicUpdate <String>]
+   [-LoadExisting]
+   [-ComputerName <String>]
+   [-PassThru]
+   [-Name] <String>
+   [-ReplicationScope] <String>
+   [[-DirectoryPartitionName] <String>]
+   [-CimSession <CimSession[]>]
+   [-ThrottleLimit <Int32>]
+   [-AsJob]
+   [-WhatIf]
+   [-Confirm]
+   [<CommonParameters>]`
+
+__Create Secondary Zone__
+ - CMD: `dnscmd.exe /zoneadd <ZoneName> /secondary <MasterIPAddress> /file <FileName> /dp <FQDN>`
+ - PS : `Add-DnsServerSecondaryZone
+   [-LoadExisting]
+   [-MasterServers] <IPAddress[]>
+   [-ComputerName <String>]
+   [-PassThru]
+   [-Name] <String>
+   [-ZoneFile] <String>
+   [-CimSession <CimSession[]>]
+   [-ThrottleLimit <Int32>]
+   [-AsJob]
+   [-WhatIf]
+   [-Confirm]
+   [<CommonParameters>]`
+
+ - PS NetID : `Add-DnsServerSecondaryZone
+   [-LoadExisting]
+   [-MasterServers] <IPAddress[]>
+   [-ComputerName <String>]
+   [-PassThru]
+   [-ZoneFile] <String>
+   -NetworkId <String>
+   [-CimSession <CimSession[]>]
+   [-ThrottleLimit <Int32>]
+   [-AsJob]
+   [-WhatIf]
+   [-Confirm]
+   [<CommonParameters>]`
+
+__Create Stub Zone__
+ - CMD: `dnscmd.exe /zoneadd <Zonename> /dsstub <MasterIPAddress> /dp <FQDN>`
+
+ - PS : `Add-DnsServerStubZone
+   [-LoadExisting]
+   [-MasterServers] <IPAddress[]>
+   [-ComputerName <String>]
+   [-PassThru]
+   [-Name] <String>
+   [-ZoneFile <String>]
+   [-CimSession <CimSession[]>]
+   [-ThrottleLimit <Int32>]
+   [-AsJob]
+   [-WhatIf]
+   [-Confirm]
+   [<CommonParameters>]`
+ - PS : `Add-DnsServerStubZone
+   [-LoadExisting]
+   [-MasterServers] <IPAddress[]>
+   [-ComputerName <String>]
+   [-PassThru]
+   [-ReplicationScope] <String>
+   [-Name] <String>
+   [[-DirectoryPartitionName] <String>]
+   [-CimSession <CimSession[]>]
+   [-ThrottleLimit <Int32>]
+   [-AsJob]
+   [-WhatIf]
+   [-Confirm]
+   [<CommonParameters>]`
+
  - Process of replicating zone files is a *zone transfer*
    + Transfers can be made from primary and secondary servers
    + "*Master DNS Server*" is the source of the info
    + Transfers are made when master sends a notification to secondary servers when zone is changed or on refresh interval detailed in the SOA
    + 2 types: full (AXFR), incremental (IXFR)
    + Bing 4.93 & NT 4.0 support AXFR only
+
+### DNS Forwarding
+ - Rather than handling the query, a DNS Server can be set to "forward" the query to another server
+ - Best practice is to forward requests for outside address to an outside dedicated forwarder.
+   + Otherwise, internal info can be exposed
+   + Excesive network traffic without.
+ - Clients should point to an internal DNS server
+ - DNS Forwarder entries should point to either higher internal servers or an outside server.
+
+__Create a DNS Forward Zone__
+
+__Add a DNS Forwarder__
+ - CMD: `dnscmd.exe <ip address> /config /add `
+ - PS : `Add-DnsServerForwarder
+   [-IPAddress] <IPAddress[]>
+   [-ComputerName <String>]
+   [-PassThru]
+   [-CimSession <CimSession[]>]
+   [-ThrottleLimit <Int32>]
+   [-AsJob]
+   [-WhatIf]
+   [-Confirm]
+   [<CommonParameters>]`
 
 ### DNS Query
  - Queries are sent client-to-server or server-to-server
@@ -244,6 +348,20 @@ _Note: Secondary or stubs of a zone cannot be hosted on the primary server for t
    + Otherwise, is round robin
  - Root hints
    + Direct non-root DNS servers to root ones
+
+__Adding DNS Root Hints__
+ - CMD: `dnscmd.exe <ip address> /RecordAdd /RootHints <host> A <ip>`
+ 
+ - PS : `Add-DnsServerRootHint
+   [-ComputerName <String>]
+   [-PassThru]
+   [-InputObject] <CimInstance>
+   [-CimSession <CimSession[]>]
+   [-ThrottleLimit <Int32>]
+   [-AsJob]
+   [-WhatIf]
+   [-Confirm]
+   [<CommonParameters>]`
 
 ### ENDS0
  - Extensions for DNS, advertises UDP packet size and allows packets over 512 bytes
@@ -261,12 +379,39 @@ _Note: Secondary or stubs of a zone cannot be hosted on the primary server for t
 
 ### Configuration Steps
 
+__1. Backup current settings and zones__
+ - CMD: `dnscmd.exe <host ip> /zoneExport <zonename> <ExportName>`
+ - PS : `Export-DnsServerZone
+      [-FileName] <String>
+      [-Name] <String>
+      [-ComputerName <String>]
+      [-PassThru]
+      [-CimSession <CimSession[]>]
+      [-ThrottleLimit <Int32>]
+      [-AsJob]
+      [-WhatIf]
+      [-Confirm]
+      [<CommonParameters>]`
+
+
+__2. Turn on DNS Logging__
+
+__3. Create A Records for all internal ips__
+
+__4. Set forwarders to higher dns/public dns server__
+
+
 
 ### Known Security Vulnerabilities
-
+__STIG_V-4501: DHCP server is not disabled on any Windows 2000/2003 DNS server that supports dynamic updates__
+- Severity: High
+- Fix: Remove DHCP Service.
+  + CMD 2008R2+: `dism.exe /Online /Disable-Feature /FeatureName:DHCPServerCore`
+  + PS : `Remove-WindowsFeature DHCP`
 
 ### Further Reading
  - How DNS Works: https://technet.microsoft.com/en-us/library/cc772774%28v=ws.10%29.aspx?f=255&MSPPError=-2147217396
  - DNSCMD: https://technet.microsoft.com/en-us/library/cc756116%28v=ws.10%29.aspx?f=255&MSPPError=-2147217396#BKMK_14
  - Powershell Module: https://docs.microsoft.com/en-us/powershell/module/dnsserver/Remove-DnsServerResourceRecord?view=win10-ps
  - Zone transfer notification: https://www.ietf.org/rfc/rfc1996.txt
+ - Common DNS Errors: https://www.ietf.org/rfc/rfc1912.txt

@@ -12,3 +12,5 @@
  
  - For Windows Vista and Server 2008, only Powershell 1.0 is a feature, and only for non-serverCore
  - For Windows Server 2003 and XP SP2 and SP3, Powershell is an installable application
+
+### Useful Commands
