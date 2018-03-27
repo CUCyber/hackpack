@@ -46,6 +46,9 @@ options {
 #    8.8.8.8;
 #    8.8.4.4;
 #};
+
+#include the zone settings file
+include "/var/named/example.com.conf";
 ```
 
 
