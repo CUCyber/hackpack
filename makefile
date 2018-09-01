@@ -28,7 +28,7 @@ open: $(OUTFILE)
 website: $(WEBSITE)$(ROOT)$(OUTFILE) $(WEBSITE)$(ROOT)$(OUTFILE_HTML)
 
 serve: $(OUTDIR)$(ROOT)$(OUTFILE_HTML) $(OUTDIR)/images/ $(OUTDIR)/fonts/ $(OUTDIR)/css/ $(OUTDIR)/js/
-	./$(SERVE) $(OUTDIR)
+	"./$(SERVE)" "$(OUTDIR)"
 
 update: $(WEBSITE)$(ROOT)$(OUTFILE) $(WEBSITE)$(ROOT)$(OUTFILE_HTML)
 	git -C "$(WEBSITE)" add ".$(ROOT)$(OUTFILE)" ".$(ROOT)$(OUTFILE_HTML)"
