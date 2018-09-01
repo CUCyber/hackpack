@@ -8,6 +8,7 @@ In this repository are the markdown sources to the hackpack used by CU Cyber in 
 
 * make
 * git
+* rsync
 * python3
 * pandoc
 * pandocfilters

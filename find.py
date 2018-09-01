@@ -17,7 +17,7 @@ def find_files(first_dirs, first_files, last_files, last_dirs, root_dir, exclude
             if doc.endswith('.md'):
                 yield os.path.join(root, doc)
 
-        all_dirs = set(dirs)
+        all_dirs = set(dirs) - excludes
         fdirs = [i for i in first_dirs if i in all_dirs]
         ldirs = [i for i in last_dirs if i in all_dirs]
         rdirs = sorted((all_dirs - set(fdirs)) - set(ldirs))

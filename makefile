@@ -1,23 +1,24 @@
 SHELL=/bin/bash
 
 OUTFILE=hackpack.pdf
+OUTDIR=public
 ROOT=/documents/
 
-TEMPLATE=./cyber.latex
+TEMPLATE=cyber.latex
 
 OUTFILE_HTML=hackpack.html
 
-FILTER_HTML=./html.py
-TEMPLATE_HTML=./cyber.html
+FILTER_HTML=filter.py
+TEMPLATE_HTML=cyber.html
 
 HIGHLIGHT_STYLE=tango
 
-FIND=./find.py
+FIND=find.py
+SERVE=serve.py
 
 WEBSITE=../website
-SERVE=./serve.py
 
-SOURCES!="$(FIND)" -e 'LICENSE.md' -e 'README.md' -f general -f checklists -l appendix -g index.md .
+SOURCES!="./$(FIND)" -e 'LICENSE.md' -e 'README.md' -e "$(OUTDIR)" -f general -f checklists -l appendix -g index.md .
 
 all: $(OUTFILE)
 
@@ -26,8 +27,8 @@ open: $(OUTFILE)
 
 website: $(WEBSITE)$(ROOT)$(OUTFILE) $(WEBSITE)$(ROOT)$(OUTFILE_HTML)
 
-serve: $(WEBSITE)$(ROOT)$(OUTFILE_HTML)
-	$(SERVE) $(WEBSITE)
+serve: $(OUTDIR)$(ROOT)$(OUTFILE_HTML) $(OUTDIR)/images/ $(OUTDIR)/fonts/ $(OUTDIR)/css/ $(OUTDIR)/js/
+	./$(SERVE) $(OUTDIR)
 
 update: $(WEBSITE)$(ROOT)$(OUTFILE) $(WEBSITE)$(ROOT)$(OUTFILE_HTML)
 	git -C "$(WEBSITE)" add ".$(ROOT)$(OUTFILE)" ".$(ROOT)$(OUTFILE_HTML)"
@@ -36,6 +37,7 @@ update: $(WEBSITE)$(ROOT)$(OUTFILE) $(WEBSITE)$(ROOT)$(OUTFILE_HTML)
 
 clean:
 	rm -f "$(OUTFILE)" "$(OUTFILE_HTML)"
+	rm -rf "$(OUTDIR)"
 
 $(OUTFILE): $(SOURCES)
 	pandoc --template="$(TEMPLATE)" --highlight-style="${HIGHLIGHT_STYLE}" --standalone --toc --output "$(OUTFILE)" $(SOURCES)
@@ -43,10 +45,18 @@ $(OUTFILE): $(SOURCES)
 $(OUTFILE_HTML): $(SOURCES)
 	pandoc --filter="$(FILTER_HTML)" --template="$(TEMPLATE_HTML)" --highlight-style="${HIGHLIGHT_STYLE}" --standalone --toc --output "$(OUTFILE_HTML)" $(SOURCES)
 
+$(OUTDIR)$(ROOT)$(OUTFILE_HTML): $(OUTFILE_HTML)
+	mkdir -p "$(OUTDIR)$(ROOT)"
+	cp "$(OUTFILE_HTML)" "$(OUTDIR)$(ROOT)$(OUTFILE_HTML)"
+
+$(OUTDIR)/%/: $(WEBSITE)/%/
+	rsync -av --delete "$^" "$@"
+	touch "$@"
+
 $(WEBSITE)$(ROOT)$(OUTFILE): $(OUTFILE)
-	cp "$(OUTFILE)" "$(WEBSITE)$(ROOT)"
+	cp "$(OUTFILE)" "$(WEBSITE)$(ROOT)$(OUTFILE)"
 
 $(WEBSITE)$(ROOT)$(OUTFILE_HTML): $(OUTFILE_HTML)
-	cp "$(OUTFILE_HTML)" "$(WEBSITE)$(ROOT)"
+	cp "$(OUTFILE_HTML)" "$(WEBSITE)$(ROOT)$(OUTFILE_HTML)"
 
 .PHONY: all open update clean
