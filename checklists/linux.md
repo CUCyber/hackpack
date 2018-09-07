@@ -4,8 +4,10 @@ This checklist is designed for the first 30 minutes of competition.
 
 For each system:
 
-* Download toolset:
+* Download toolset
 	- `wget -qO- http://bit.ly/2GqAfTb | tar -xzv`
+* Download busybox
+	- `wget -qO- https://bit.ly/2N0a4KT >/bin/busybox && chmod +x /bin/busybox`
 * Change the password for the root account
 	- find path to 'passwd': `type passwd`
 	- ensure passwd is not a script: `cat <path to passwd>`
