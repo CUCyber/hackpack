@@ -4,12 +4,12 @@ OUTFILE=hackpack.pdf
 OUTDIR=public
 ROOT=/documents/
 
-TEMPLATE=cyber.latex
+TEMPLATE=template.latex
 
 OUTFILE_HTML=hackpack.html
 
 FILTER_HTML=filter.py
-TEMPLATE_HTML=cyber.html
+TEMPLATE_HTML=template.html
 
 HIGHLIGHT_STYLE=tango
 
