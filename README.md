@@ -67,6 +67,16 @@ $ pip3 install watchdog
 ```
 
 
+## Preparation
+
+You must clone the website repository adjacent to the hackpack repository with the name 'website' to use `make serve` and `make update`.
+
+```sh
+$ git clone https://github.com/CUCyber/cucyber.github.io.git website
+$ git -C website checkout dev
+```
+
+
 ## Downloading
 
 ```sh
