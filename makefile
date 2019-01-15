@@ -23,7 +23,7 @@ SOURCES!="./$(FIND)" -e 'LICENSE.md' -e 'README.md' -e "$(OUTDIR)" -f general -f
 all: $(OUTFILE)
 
 open: $(OUTFILE)
-	xdg-open "$(OUTFILE)" &>/dev/null & disown
+	which xdg-open >/dev/null 2>&1 && (setsid xdg-open "$(OUTFILE)" >/dev/null 2>&1 &) || open "$(OUTFILE)" >/dev/null 2>&1
 
 website: $(WEBSITE)$(ROOT)$(OUTFILE) $(WEBSITE)$(ROOT)$(OUTFILE_HTML)
 
