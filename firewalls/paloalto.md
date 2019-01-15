@@ -84,18 +84,6 @@ up
 To edit security rules, such as traffic barriers between interfaces, enter the `edit rulebase security` context. Rules between zones are default deny and rules within zones are default allow.
 
 
-#### DMZ and LAN Interaction
-
-The following rule enables a connection between the DMZ and LAN under specific circumstances, here a MySQL connection from webapps to database.
-
-```paloalto
-edit rulebase security
-set rules database from dmz to lan source <webapps> destination <database>
-  application mysql service application-default action allow
-up
-```
-
-
 #### Incoming Traffic
 
 The following rule enables a connection between the public interface and LAN under specific circumstances, here an HTTP connection to webapps. Replace `application-default` with a port number if different from default.
