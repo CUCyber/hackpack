@@ -17,6 +17,7 @@ FIND=find.py
 SERVE=serve.py
 
 WEBSITE=../website
+SITE=/_site
 
 SOURCES!="./$(FIND)" -e 'LICENSE.md' -e 'README.md' -e "$(OUTDIR)" -f general -f checklists -l appendix -g index.md .
 
@@ -25,12 +26,12 @@ all: $(OUTFILE)
 open: $(OUTFILE)
 	which xdg-open >/dev/null 2>&1 && (setsid xdg-open "$(OUTFILE)" >/dev/null 2>&1 &) || open "$(OUTFILE)" >/dev/null 2>&1
 
-website: $(WEBSITE)$(ROOT)$(OUTFILE) $(WEBSITE)$(ROOT)$(OUTFILE_HTML)
+website: $(WEBSITE)$(SITE)$(ROOT)$(OUTFILE) $(WEBSITE)$(SITE)$(ROOT)$(OUTFILE_HTML)
 
 serve: $(OUTDIR)$(ROOT)$(OUTFILE_HTML) $(OUTDIR)/images/ $(OUTDIR)/fonts/ $(OUTDIR)/css/ $(OUTDIR)/js/
 	"./$(SERVE)" "$(OUTDIR)"
 
-update: $(WEBSITE)$(ROOT)$(OUTFILE) $(WEBSITE)$(ROOT)$(OUTFILE_HTML)
+update: $(WEBSITE)$(SITE)$(ROOT)$(OUTFILE) $(WEBSITE)$(SITE)$(ROOT)$(OUTFILE_HTML)
 	git -C "$(WEBSITE)" add ".$(ROOT)$(OUTFILE)" ".$(ROOT)$(OUTFILE_HTML)"
 	git -C "$(WEBSITE)" commit -m "update hackpack"
 	git -C "$(WEBSITE)" push
@@ -49,14 +50,14 @@ $(OUTDIR)$(ROOT)$(OUTFILE_HTML): $(OUTFILE_HTML)
 	mkdir -p "$(OUTDIR)$(ROOT)"
 	cp "$(OUTFILE_HTML)" "$(OUTDIR)$(ROOT)$(OUTFILE_HTML)"
 
-$(OUTDIR)/%/: $(WEBSITE)/%/
+$(OUTDIR)/%/: $(WEBSITE)$(SITE)/%/
 	rsync -av --delete "$^" "$@"
 	touch "$@"
 
-$(WEBSITE)$(ROOT)$(OUTFILE): $(OUTFILE)
-	cp "$(OUTFILE)" "$(WEBSITE)$(ROOT)$(OUTFILE)"
+$(WEBSITE)$(SITE)$(ROOT)$(OUTFILE): $(OUTFILE)
+	cp "$(OUTFILE)" "$(WEBSITE)$(SITE)$(ROOT)$(OUTFILE)"
 
-$(WEBSITE)$(ROOT)$(OUTFILE_HTML): $(OUTFILE_HTML)
-	cp "$(OUTFILE_HTML)" "$(WEBSITE)$(ROOT)$(OUTFILE_HTML)"
+$(WEBSITE)$(SITE)$(ROOT)$(OUTFILE_HTML): $(OUTFILE_HTML)
+	cp "$(OUTFILE_HTML)" "$(WEBSITE)$(SITE)$(ROOT)$(OUTFILE_HTML)"
 
 .PHONY: all open update clean
