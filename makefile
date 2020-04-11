@@ -32,7 +32,7 @@ serve: $(OUTDIR)$(ROOT)$(OUTFILE_HTML) $(OUTDIR)/images/ $(OUTDIR)/fonts/ $(OUTD
 	"./$(SERVE)" "$(OUTDIR)"
 
 update: $(WEBSITE)$(SITE)$(ROOT)$(OUTFILE) $(WEBSITE)$(SITE)$(ROOT)$(OUTFILE_HTML)
-	git -C "$(WEBSITE)" add ".$(ROOT)$(OUTFILE)" ".$(ROOT)$(OUTFILE_HTML)"
+	git -C "$(WEBSITE)" add ".$(SITE)$(ROOT)$(OUTFILE)" ".$(SITE)$(ROOT)$(OUTFILE_HTML)"
 	git -C "$(WEBSITE)" commit -m "update hackpack"
 	git -C "$(WEBSITE)" push
 
