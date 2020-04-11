@@ -50,7 +50,7 @@ $(OUTDIR)$(ROOT)$(OUTFILE_HTML): $(OUTFILE_HTML)
 	mkdir -p "$(OUTDIR)$(ROOT)"
 	cp "$(OUTFILE_HTML)" "$(OUTDIR)$(ROOT)$(OUTFILE_HTML)"
 
-$(OUTDIR)/%/: $(WEBSITE)$(SITE)/%/
+$(OUTDIR)/%/: $(WEBSITE)/%/
 	rsync -av --delete "$^" "$@"
 	touch "$@"
 

@@ -46,7 +46,6 @@
         <!-- owl carouserl js -->
         <script src="/js/owl.carousel.min.js"></script>
         <!-- bootstrap js -->
-
         <script src="/js/bootstrap.min.js"></script>
         <!-- wow js -->
         <script src="/js/wow.min.js"></script>
@@ -67,7 +66,7 @@
             }
 
             @media (min-width: 768px) {
-                *[id]:before {
+                h1[id]::before, h2[id]::before, h3[id]::before, h4[id]::before, h5[id]::before, h6[id]::before {
                     display: block;
                     content: " ";
                     margin-top: -141px;
@@ -211,14 +210,14 @@
 
                         $if(toc)$
                         <div class="table-of-contents">
-                            <h1 id="top">Table of Contents <button data-toggle="collapse" data-target="#TOC" class="btn">Show</button></h1>
+                            <h1 id="top">Table of Contents <button data-toggle="collapse" data-target="#TOC" class="btn btn-info">Show</button></h1>
 
                             <nav id="TOC" class="collapse">
                                 $toc$
                             </nav>
                         </div>
                         $endif$
-                        $body$
+$body$
                         $for(include-after)$
                         $include-after$
                         $endfor$
