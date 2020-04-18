@@ -1,84 +1,13 @@
 <!DOCTYPE html>
-<html$if(lang)$ lang="$lang$"$else$ lang="en"$endif$$if(dir)$ dir="$dir$"$endif$ class="no-js">
+<html$if(lang)$ lang="$lang$"$else$ lang="en"$endif$$if(dir)$ dir="$dir$"$endif$>
     <head>
-        <!-- Basic Page Needs
-        ================================================== -->
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <link rel="icon" type="image/png" href="/images/shield-small.png">
-        <title>CU Cyber - Hackpack</title>
-        <link rel="shortcut icon" href="/images/shield-small.png">
-        <meta name="description" content="$site_description$">
-        <!-- Mobile Specific Metas
-        ================================================== -->
-        <meta name="format-detection" content="telephone=no">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- Social Media Info
-        ================================================== -->
-        <meta property="og:title" content="$site_name$ - Hackpack">
-        <meta property="og:description" content="$site_description$">
-        <meta property="og:image" content="$site_url$/images/shield.png">
-        <meta property="og:url" content="$site_url$$file$">
-        <meta property="og:site_name" content="$site_name$">
-        <meta name="twitter:site" content="$site_twitter$">
-        <meta name="twitter:card" content="summary_large_image">
+        <title>$title$</title>
 
-        <!-- Template CSS Files
-        ================================================== -->
-        <!-- Twitter Bootstrs CSS -->
-        <link rel="stylesheet" href="/css/bootstrap.min.css">
-        <!-- Ionicons Fonts Css -->
-        <link rel="stylesheet" href="/css/ionicons.min.css">
-        <!-- animate css -->
-        <link rel="stylesheet" href="/css/animate.css">
-        <!-- Hero area slider css-->
-        <link rel="stylesheet" href="/css/slider.css">
-        <!-- owl craousel css -->
-        <link rel="stylesheet" href="/css/owl.carousel.css">
-        <link rel="stylesheet" href="/css/owl.theme.css">
-        <link rel="stylesheet" href="/css/jquery.fancybox.css">
-        <!-- template main css file -->
-        <link rel="stylesheet" href="/css/main.css">
-        <!-- responsive css -->
-        <link rel="stylesheet" href="/css/responsive.css">
-
-        <!-- Template Javascript Files
-        ================================================== -->
-        <!-- html5shiv js -->
-        <script src="/js/vendor/html5shiv-printshiv.min.js"></script>
-        <!-- modernizr js -->
-        <script src="/js/vendor/modernizr-2.6.2.min.js"></script>
-        <!-- jquery -->
-        <script src="/js/jquery.min.js"></script>
-        <!-- owl carouserl js -->
-        <script src="/js/owl.carousel.min.js"></script>
-        <!-- bootstrap js -->
-        <script src="/js/bootstrap.min.js"></script>
-        <!-- wow js -->
-        <script src="/js/wow.min.js"></script>
-        <!-- slider js -->
-        <script src="/js/slider.js"></script>
-        <script src="/js/jquery.fancybox.js"></script>
-        <!-- template main js -->
-        <script src="/js/main.js"></script>
-        <!-- icons js -->
-        <script src="https://kit.fontawesome.com/8f683739d8.js"></script>
-
-        <!-- Pandoc Styling
-        ================================================== -->
         <style type="text/css">
             code {
                 white-space: pre-wrap;
                 word-wrap: break-word;
-            }
-
-            @media (min-width: 768px) {
-                h1[id]::before, h2[id]::before, h3[id]::before, h4[id]::before, h5[id]::before, h6[id]::before {
-                    display: block;
-                    content: " ";
-                    margin-top: -141px;
-                    height: 141px;
-                    visibility: hidden;
-                }
             }
         </style>
         $if(quotes)$
@@ -99,152 +28,43 @@
         $if(math)$
         $math$
         $endif$
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
         $for(header-includes)$
         $header-includes$
         $endfor$
-
-        <!-- TOC Button JavaScript -->
-        <script type="text/javascript">
-            $$(document).ready(function() {
-                $$('.table-of-contents .btn').click(function() {
-                    if ($$(this).text() === 'Show')
-                        $$(this).text('Hide');
-                    else
-                        $$(this).text('Show');
-                });
-            });
-        </script>
     </head>
     <body>
-        <!--
-        ==================================================
-        Header Section Start
-        ================================================== -->
-        <header id="top-bar" class="navbar-fixed-top animated-header">
-            <div class="container">
-                <div class="navbar-header">
-                    <!-- responsive nav button -->
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <!-- /responsive nav button -->
+        <section>
+            $for(include-before)$
+            $include-before$
+            $endfor$
+            $if(title)$
+            <header>
+                <h1>$title$</h1>
+                $if(subtitle)$
+                <p>$subtitle$</p>
+                $endif$
+                $if(date)$
+                <p>$date$</p>
+                $endif$
+            </header>
+            $endif$
 
-                    <!-- logo -->
-                    <div class="navbar-brand">
-                        <a href="/" class="stop-theme">
-                            <img src="/images/shield-small.png" alt="">
-                            CU Cyber
-                        </a>
-                    </div>
-                    <!-- /logo -->
+            $if(toc)$
+            <div>
+                <h1 id="top">Table of Contents</h1>
 
-                </div>
-                <!-- main menu -->
-                <nav class="collapse navbar-collapse navbar-right" role="navigation">
-                    <div class="main-menu">
-                        <ul class="flat nav navbar-nav navbar-right">
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/about.html">About</a></li>
-                            <li><a href="/events.html">Events</a></li>
-                            <li><a href="/contact.html">Contact us</a></li>
-
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Useful Resources <span class="caret"></span></a>
-                                <div class="dropdown-menu">
-                                    <ul class="flat">
-                                        <li><a href="/resources.html">Presentations</a></li>
-                                        <li><a href="/wiki/">Wiki</a></li>
-                                        <li><a href="/documents/hackpack.html">Hackpack</a></li>
-                                        <li><a href="https://github.com/CUCyber">GitHub</a></li>
-                                        <li><a href="https://clemson.collegiatelink.net/organization/cucyber">TigerQuest</a></li>
-                                        <li><a href="https://forms.gle/7nKX1ZZco6veSpLJA">Membership</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-
-                            <li><a href="https://cuctf.io">CUCTF</a></li>
-                        </ul>
-                    </div>
+                <nav id="TOC">
+                    $toc$
                 </nav>
-                <!-- /main nav -->
             </div>
-        </header>
-        <!--
-        ==================================================
-            Global Page Section Start
-        ================================================== -->
-        <section class="global-page-header">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="block">
-                            <h2>Hackpack</h2>
-                            <ol class="breadcrumb">
-                                <li><a href="/index.html"><i class="ion-ios-home"></i> Home</a></li>
-                                <li>Documents</li>
-                                <li class="active">Cyber Defense Hackpack</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="single-post">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        $for(include-before)$
-                        $include-before$
-                        $endfor$
-                        $if(title)$
-                        <header>
-                            <h1>$title$</h1>
-                            $if(subtitle)$
-                            <p class="subtitle">$subtitle$</p>
-                            $endif$
-                            $if(date)$
-                            <p class="date">$date$</p>
-                            $endif$
-                        </header>
-                        $endif$
-
-                        <p>You can download a PDF of this hackpack <a href="/documents/hackpack.pdf">here</a> and find the Markdown sources of this hackpack on <a href="https://github.com/CUCyber/hackpack">GitHub</a>.</p>
-
-                        $if(toc)$
-                        <div class="table-of-contents">
-                            <h1 id="top">Table of Contents <button data-toggle="collapse" data-target="#TOC" class="btn btn-info">Show</button></h1>
-
-                            <nav id="TOC" class="collapse">
-                                $toc$
-                            </nav>
-                        </div>
-                        $endif$
+            $endif$
 $body$
-                        $for(include-after)$
-                        $include-after$
-                        $endfor$
-                    </div>
-                </div>
-            </div>
+            $for(include-after)$
+            $include-after$
+            $endfor$
         </section>
-
-        <!--
-        ==================================================
-        Footer Section Start
-        ================================================== -->
-        <footer id="footer">
-            <div class="container">
-                <ul class="list-inline text-center">
-                    <li><a href="https://discord.gg/f7ZcC7z"><i class="fab fa-discord fa-2x"></i></a></li>
-                    <li><a href="https://www.linkedin.com/groups/12049268/"><i class="fab fa-linkedin-in fa-2x"></i></a></li>
-                    <li><a href="https://twitter.com/CU_Cyber"><i class="fab fa-twitter fa-2x"></i></a></li>
-                </ul>
-                <p class="copyright">Copyright: <span>2020</span> CU Cyber &lt;cyber@clemson.edu&gt;. Design and Developed by <a href="https://themefisher.com">Themefisher</a></p>
-            </div>
-        </footer> <!-- /#footer -->
     </body>
 </html>

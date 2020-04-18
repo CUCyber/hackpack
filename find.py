@@ -3,7 +3,7 @@ import os
 import itertools
 
 
-def find_files(first_dirs, first_files, last_files, last_dirs, root_dir, excludes):
+def find_files(suffix, first_dirs, first_files, last_files, last_dirs, root_dir, excludes):
     excludes = set(excludes)
 
     for root, dirs, files in os.walk(root_dir):
@@ -14,7 +14,7 @@ def find_files(first_dirs, first_files, last_files, last_dirs, root_dir, exclude
         rfiles = sorted((all_files - set(ffiles)) - set(lfiles))
 
         for doc in itertools.chain(ffiles, rfiles, lfiles):
-            if doc.endswith('.md'):
+            if doc.endswith(suffix):
                 yield os.path.join(root, doc)
 
         all_dirs = set(dirs) - excludes
@@ -30,6 +30,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='find all relevant files to include in a hackpack')
 
+    parser.add_argument('-s', '--suffix', dest='suffix', default='.md', help='suffix to search for')
     parser.add_argument('-e', '--exclude', action='append', dest='exclude', default=[], help='file to exclude')
     parser.add_argument('-f', '--first', action='append', dest='first', default=[], help='folders to place first')
     parser.add_argument('-g', '--first-file', action='append', dest='first_file', default=[], help='files to place first')
@@ -39,4 +40,4 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    print(' '.join(find_files(args.first, args.first_file, args.last_file, args.last, args.dir, args.exclude)))
+    print(' '.join(find_files(args.suffix, args.first, args.first_file, args.last_file, args.last, args.dir, args.exclude)))

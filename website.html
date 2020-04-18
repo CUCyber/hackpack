@@ -1,0 +1,108 @@
+---
+layout: default
+
+title: Hackpack
+
+head: |
+  <!-- Pandoc Styling
+  ================================================== -->
+  <style type="text/css">
+      code {
+          white-space: pre-wrap;
+          word-wrap: break-word;
+      }
+  
+      @media (min-width: 768px) {
+          h1[id]::before, h2[id]::before, h3[id]::before, h4[id]::before, h5[id]::before, h6[id]::before {
+              display: block;
+              content: " ";
+              margin-top: -141px;
+              height: 141px;
+              visibility: hidden;
+          }
+      }
+  </style>
+  $if(quotes)$
+  <style type="text/css">
+      q {
+          quotes: "“" "”" "‘" "’";
+      }
+  </style>
+  $endif$
+  $if(highlighting-css)$
+  <style type="text/css">
+      $highlighting-css$
+  </style>
+  $endif$
+  $for(css)$
+  <link rel="stylesheet" href="$css$">
+  $endfor$
+  $if(math)$
+  $math$
+  $endif$
+  <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  $for(header-includes)$
+  $header-includes$
+  $endfor$
+  
+  <!-- TOC Button JavaScript -->
+  <script type="text/javascript">
+      $$(document).ready(function() {
+          $$('.table-of-contents .btn').click(function() {
+              if ($$(this).text() === 'Show')
+                  $$(this).text('Hide');
+              else
+                  $$(this).text('Show');
+          });
+      });
+  </script>
+
+breadcrumbs:
+  header: Cyber Defense Hackpack
+  list:
+    - Home: '/'
+    - Documents: null
+---
+
+{% raw %}
+<section class="single-post">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                $for(include-before)$
+                $include-before$
+                $endfor$
+                $if(title)$
+                <header>
+                    <h1>$title$</h1>
+                    $if(subtitle)$
+                    <p class="subtitle">$subtitle$</p>
+                    $endif$
+                    $if(date)$
+                    <p class="date">$date$</p>
+                    $endif$
+                </header>
+                $endif$
+
+                <p>You can download a PDF of this hackpack <a href="/documents/hackpack.pdf">here</a> and find the Markdown sources of this hackpack on <a href="https://github.com/CUCyber/hackpack">GitHub</a>.</p>
+
+                $if(toc)$
+                <div class="table-of-contents">
+                    <h1 id="top">Table of Contents <button data-toggle="collapse" data-target="#TOC" class="btn btn-info">Show</button></h1>
+
+                    <nav id="TOC" class="collapse">
+                        $toc$
+                    </nav>
+                </div>
+                $endif$
+$body$
+                $for(include-after)$
+                $include-after$
+                $endfor$
+            </div>
+        </div>
+    </div>
+</section>
+{% endraw %}
