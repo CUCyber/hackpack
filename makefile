@@ -16,6 +16,11 @@ HIGHLIGHT_STYLE=tango
 FIND=find.py
 SERVE=serve.py
 
+SITE_NAME=CU Cyber
+SITE_URL=https://cucyber.net
+SITE_TWITTER=@CU_Cyber
+SITE_DESCRIPTION=CU Cyber is a student led organization at Clemson University that focuses on the technical and social aspects of cyber security
+
 WEBSITE=../website
 SITE=/_site
 
@@ -44,7 +49,7 @@ $(OUTFILE): $(SOURCES)
 	pandoc --template="$(TEMPLATE)" --highlight-style="${HIGHLIGHT_STYLE}" --standalone --toc --output "$(OUTFILE)" $(SOURCES)
 
 $(OUTFILE_HTML): $(SOURCES)
-	pandoc --filter="$(FILTER_HTML)" --template="$(TEMPLATE_HTML)" --highlight-style="${HIGHLIGHT_STYLE}" --standalone --toc --output "$(OUTFILE_HTML)" $(SOURCES)
+	pandoc --filter="$(FILTER_HTML)" --template="$(TEMPLATE_HTML)" --highlight-style="${HIGHLIGHT_STYLE}" --standalone --toc --output "$(OUTFILE_HTML)" --metadata=root:"$(ROOT)" --metadata=path:"$$(dirname "$(ROOT)$(OUTFILE_HTML)")" --metadata=file:"$(ROOT)$(OUTFILE_HTML)" --metadata=site_name:"$(SITE_NAME)" --metadata=site_url:"$(SITE_URL)" --metadata=site_twitter:"$(SITE_TWITTER)" --metadata=site_description:"$(SITE_DESCRIPTION)" $(SOURCES)
 
 $(OUTDIR)$(ROOT)$(OUTFILE_HTML): $(OUTFILE_HTML)
 	mkdir -p "$(OUTDIR)$(ROOT)"
